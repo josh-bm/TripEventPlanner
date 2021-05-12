@@ -488,3 +488,12 @@ C:\Users\Joshua\Documents\GitHub\TripEventPlanner\TripEventPlanner\obj\Debug\net
 C:\Users\Joshua\Documents\GitHub\TripEventPlanner\TripEventPlanner\obj\Debug\net5.0\ref\TripEventPlanner.dll
 C:\Users\Joshua\Documents\GitHub\TripEventPlanner\TripEventPlanner\obj\Debug\net5.0\TripEventPlanner.pdb
 C:\Users\Joshua\Documents\GitHub\TripEventPlanner\TripEventPlanner\obj\Debug\net5.0\TripEventPlanner.genruntimeconfig.cache
+E:\School Folder\PBA Webdevelopment\Semester1\Backendprogrammering\src\TripEventPlanner\TripEventPlanner\TripEventPlanner\bin\Debug\net5.0\EntityFramework.SqlServer.dll
+E:\School Folder\PBA Webdevelopment\Semester1\Backendprogrammering\src\TripEventPlanner\TripEventPlanner\TripEventPlanner\bin\Debug\net5.0\EntityFramework.dll
+E:\School Folder\PBA Webdevelopment\Semester1\Backendprogrammering\src\TripEventPlanner\TripEventPlanner\TripEventPlanner\bin\Debug\net5.0\System.CodeDom.dll
+E:\School Folder\PBA Webdevelopment\Semester1\Backendprogrammering\src\TripEventPlanner\TripEventPlanner\TripEventPlanner\bin\Debug\net5.0\System.Data.SqlClient.dll
+E:\School Folder\PBA Webdevelopment\Semester1\Backendprogrammering\src\TripEventPlanner\TripEventPlanner\TripEventPlanner\bin\Debug\net5.0\runtimes\win-arm64\native\sni.dll
+E:\School Folder\PBA Webdevelopment\Semester1\Backendprogrammering\src\TripEventPlanner\TripEventPlanner\TripEventPlanner\bin\Debug\net5.0\runtimes\win-x64\native\sni.dll
+E:\School Folder\PBA Webdevelopment\Semester1\Backendprogrammering\src\TripEventPlanner\TripEventPlanner\TripEventPlanner\bin\Debug\net5.0\runtimes\win-x86\native\sni.dll
+E:\School Folder\PBA Webdevelopment\Semester1\Backendprogrammering\src\TripEventPlanner\TripEventPlanner\TripEventPlanner\bin\Debug\net5.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+E:\School Folder\PBA Webdevelopment\Semester1\Backendprogrammering\src\TripEventPlanner\TripEventPlanner\TripEventPlanner\bin\Debug\net5.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
