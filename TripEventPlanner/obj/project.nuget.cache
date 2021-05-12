@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "wAE3QcIRIkZ6rGkDTxcjn7DR6W2WLTpC7wgu8E0b9kEVXflEEBeFCvA3xBgZZDqIG5WaZbWbrZQnzPD3vMv+ZQ==",
+  "dgSpecHash": "6bPPAc/zfDGMOHJegmkWfEvW/X3BkP//LJon9/FNvQDrOpCcls9dcQdTMqtP0CsSrYpPZxQfSZZmx/QbBq8wcg==",
   "success": true,
-  "projectFilePath": "E:\\School Folder\\PBA Webdevelopment\\Semester1\\Backendprogrammering\\src\\ITripPlanner\\TripEventPlanner\\TripEventPlanner\\TripEventPlanner.csproj",
+  "projectFilePath": "E:\\School Folder\\PBA Webdevelopment\\Semester1\\Backendprogrammering\\src\\TripEventPlanner\\TripEventPlanner\\TripEventPlanner\\TripEventPlanner.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Baruani Lukanda\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Baruani Lukanda\\.nuget\\packages\\microsoft.aspnetcore.html.abstractions\\2.2.0\\microsoft.aspnetcore.html.abstractions.2.2.0.nupkg.sha512",

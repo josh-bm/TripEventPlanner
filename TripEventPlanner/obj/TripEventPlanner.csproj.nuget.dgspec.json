@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\School Folder\\PBA Webdevelopment\\Semester1\\Backendprogrammering\\src\\ITripPlanner\\TripEventPlanner\\TripEventPlanner\\TripEventPlanner.csproj": {}
+    "E:\\School Folder\\PBA Webdevelopment\\Semester1\\Backendprogrammering\\src\\TripEventPlanner\\TripEventPlanner\\TripEventPlanner\\TripEventPlanner.csproj": {}
   },
   "projects": {
-    "E:\\School Folder\\PBA Webdevelopment\\Semester1\\Backendprogrammering\\src\\ITripPlanner\\TripEventPlanner\\TripEventPlanner\\TripEventPlanner.csproj": {
+    "E:\\School Folder\\PBA Webdevelopment\\Semester1\\Backendprogrammering\\src\\TripEventPlanner\\TripEventPlanner\\TripEventPlanner\\TripEventPlanner.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\School Folder\\PBA Webdevelopment\\Semester1\\Backendprogrammering\\src\\ITripPlanner\\TripEventPlanner\\TripEventPlanner\\TripEventPlanner.csproj",
+        "projectUniqueName": "E:\\School Folder\\PBA Webdevelopment\\Semester1\\Backendprogrammering\\src\\TripEventPlanner\\TripEventPlanner\\TripEventPlanner\\TripEventPlanner.csproj",
         "projectName": "TripEventPlanner",
-        "projectPath": "E:\\School Folder\\PBA Webdevelopment\\Semester1\\Backendprogrammering\\src\\ITripPlanner\\TripEventPlanner\\TripEventPlanner\\TripEventPlanner.csproj",
+        "projectPath": "E:\\School Folder\\PBA Webdevelopment\\Semester1\\Backendprogrammering\\src\\TripEventPlanner\\TripEventPlanner\\TripEventPlanner\\TripEventPlanner.csproj",
         "packagesPath": "C:\\Users\\Baruani Lukanda\\.nuget\\packages\\",
-        "outputPath": "E:\\School Folder\\PBA Webdevelopment\\Semester1\\Backendprogrammering\\src\\ITripPlanner\\TripEventPlanner\\TripEventPlanner\\obj\\",
+        "outputPath": "E:\\School Folder\\PBA Webdevelopment\\Semester1\\Backendprogrammering\\src\\TripEventPlanner\\TripEventPlanner\\TripEventPlanner\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Baruani Lukanda\\AppData\\Roaming\\NuGet\\NuGet.Config",
