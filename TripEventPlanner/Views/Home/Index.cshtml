@@ -2,7 +2,15 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<section class="search">
+    <img src="~/images/searchHome2.svg" class="search__background-img" />
+    <input class="search__input" type="text" placeholder="Where to?" />
+</section>
+
+<section class="create-trip">
+    <img src="~/images/create-trip.jpg" class="create-trip__background-img" />
+    <a asp-area="" asp-controller="trip" asp-action="Index" class="create-trip__link">
+        <input class="create-trip__input" type="button" value="Create Trip" />
+    </a>
+
+</section>
