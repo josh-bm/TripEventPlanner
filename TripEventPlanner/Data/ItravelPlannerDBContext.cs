@@ -53,15 +53,20 @@ namespace TripEventPlanner.Data
                     .IsUnicode(false)
                     .HasColumnName("adress");
 
-                entity.Property(e => e.Date)
-                    .HasColumnType("datetime")
-                    .HasColumnName("date");
-
                 entity.Property(e => e.Description)
                     .IsRequired()
                     .HasMaxLength(128)
                     .IsUnicode(false)
                     .HasColumnName("description");
+
+                entity.Property(e => e.EndDate)
+                    .HasColumnType("date")
+                    .HasColumnName("end_date");
+
+                entity.Property(e => e.ImageUrl)
+                    .HasMaxLength(128)
+                    .IsUnicode(false)
+                    .HasColumnName("image_url");
 
                 entity.Property(e => e.Name)
                     .IsRequired()
@@ -72,6 +77,10 @@ namespace TripEventPlanner.Data
                 entity.Property(e => e.Price)
                     .HasColumnType("decimal(7, 2)")
                     .HasColumnName("price");
+
+                entity.Property(e => e.StartDate)
+                    .HasColumnType("date")
+                    .HasColumnName("start_date");
 
                 entity.HasOne(d => d.ActivityType)
                     .WithMany(p => p.Activities)
@@ -98,6 +107,11 @@ namespace TripEventPlanner.Data
 
                 entity.Property(e => e.CountryId).HasColumnName("country_id");
 
+                entity.Property(e => e.ImageUrl)
+                    .HasMaxLength(128)
+                    .IsUnicode(false)
+                    .HasColumnName("image_url");
+
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(128)
@@ -108,12 +122,6 @@ namespace TripEventPlanner.Data
             modelBuilder.Entity<Location>(entity =>
             {
                 entity.Property(e => e.LocationId).HasColumnName("location_id");
-
-                entity.Property(e => e.City)
-                    .IsRequired()
-                    .HasMaxLength(128)
-                    .IsUnicode(false)
-                    .HasColumnName("city");
 
                 entity.Property(e => e.CountryId).HasColumnName("country_id");
 
@@ -158,9 +166,9 @@ namespace TripEventPlanner.Data
 
                 entity.Property(e => e.TripId).HasColumnName("trip_id");
 
-                entity.Property(e => e.Date)
-                    .HasColumnType("datetime")
-                    .HasColumnName("date");
+                entity.Property(e => e.EndDate)
+                    .HasColumnType("date")
+                    .HasColumnName("end_date");
 
                 entity.Property(e => e.LocationId).HasColumnName("location_id");
 
@@ -169,6 +177,10 @@ namespace TripEventPlanner.Data
                     .HasMaxLength(128)
                     .IsUnicode(false)
                     .HasColumnName("name");
+
+                entity.Property(e => e.StartDate)
+                    .HasColumnType("date")
+                    .HasColumnName("start_date");
 
                 entity.HasOne(d => d.Location)
                     .WithMany(p => p.Trips)

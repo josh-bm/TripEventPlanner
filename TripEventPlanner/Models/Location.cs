@@ -14,7 +14,6 @@ namespace TripEventPlanner.Models
 
         public short LocationId { get; set; }
         public string Name { get; set; }
-        public string City { get; set; }
         public short? CountryId { get; set; }
 
         public virtual Country Country { get; set; }
