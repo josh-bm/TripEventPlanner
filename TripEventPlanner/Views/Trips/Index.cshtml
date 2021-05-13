@@ -9,15 +9,18 @@
 </section>
 
 <section class="flex">
+
     @foreach (var item in Model)
     {
         if (item.StartDate >= DateTime.Now || item.EndDate <= DateTime.Now)
         {
-            <figure>
-                <img src="~/images/turkey.jpg" alt="Alternate Text" class="country-url"/>
-                <p>@Html.DisplayFor(modelItem => item.Name)</p>
-            </figure>
-            <p> @Html.DisplayFor(modelItem => item.StartDate) - @Html.DisplayFor(modelItem => item.EndDate)</p>
+            <section class="flex-wrapper">
+                <figure>
+                    <img src="~/images/turkey.jpg" alt="Alternate Text" class="country-url" />
+                    <figcaption>@Html.DisplayFor(modelItem => item.Name)</figcaption>
+                </figure>
+                <p> @Html.DisplayFor(modelItem => item.StartDate) - @Html.DisplayFor(modelItem => item.EndDate)</p>
+            </section>
         }
     }
 </section>
