@@ -5,25 +5,22 @@
 }
 
 <section>
-    <h1>My Trip</h1>
-</section>
-<section>
-    <figure>
-        <img src="#" alt="Alternate Text" />
-        <p>My Trip to</p>
-    </figure>
-    <p>12-11-2021 - 25-11-2021</p>
+    <h1>My Trips</h1>
 </section>
 
 <section>
-    <figure>
-        <img src="/Images/" alt="" style="width:50px" />
-    </figure>
     @foreach (var item in Model)
-    { 
-    <p>@Html.DisplayFor(modelItem => item.Name) @Html.DisplayFor(modelItem => item.StartDate) - @Html.DisplayFor(modelItem => item.EndDate)</p> 
+    {
+        if (item.StartDate >= DateTime.Now || item.EndDate <= DateTime.Now)
+        {
+            <figure>
+                <img src="#" alt="Alternate Text" />
+                <p>@Html.DisplayFor(modelItem => item.Name)</p>
+            </figure>
+            <p> @Html.DisplayFor(modelItem => item.StartDate) - @Html.DisplayFor(modelItem => item.EndDate)</p>
+        }
     }
-    </section>
+</section>
 
 @*
     <p>
