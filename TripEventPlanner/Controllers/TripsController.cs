@@ -22,7 +22,7 @@ namespace TripEventPlanner.Controllers
         // GET: Trips
         public async Task<IActionResult> Index()
         {
-            var itravelPlannerDBContext = _context.Trips.Include(t => t.Location);
+            var itravelPlannerDBContext = _context.Trips.Include(t => t.User);
             return View(await itravelPlannerDBContext.ToListAsync());
         }
 
@@ -35,7 +35,7 @@ namespace TripEventPlanner.Controllers
             }
 
             var trip = await _context.Trips
-                .Include(t => t.Location)
+                .Include(t => t.User)
                 .FirstOrDefaultAsync(m => m.TripId == id);
             if (trip == null)
             {
@@ -48,7 +48,7 @@ namespace TripEventPlanner.Controllers
         // GET: Trips/Create
         public IActionResult Create()
         {
-            ViewData["LocationId"] = new SelectList(_context.Locations, "LocationId", "City");
+            ViewData["UserId"] = new SelectList(_context.Users, "UserId", "Email");
             return View();
         }
 
@@ -57,7 +57,7 @@ namespace TripEventPlanner.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("TripId,Name,Date,LocationId")] Trip trip)
+        public async Task<IActionResult> Create([Bind("TripId,Name,StartDate,EndDate,UserId")] Trip trip)
         {
             if (ModelState.IsValid)
             {
@@ -65,7 +65,7 @@ namespace TripEventPlanner.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["LocationId"] = new SelectList(_context.Locations, "LocationId", "City", trip.LocationId);
+            ViewData["UserId"] = new SelectList(_context.Users, "UserId", "Email", trip.UserId);
             return View(trip);
         }
 
@@ -82,7 +82,7 @@ namespace TripEventPlanner.Controllers
             {
                 return NotFound();
             }
-            ViewData["LocationId"] = new SelectList(_context.Locations, "LocationId", "City", trip.LocationId);
+            ViewData["UserId"] = new SelectList(_context.Users, "UserId", "Email", trip.UserId);
             return View(trip);
         }
 
@@ -91,7 +91,7 @@ namespace TripEventPlanner.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(short id, [Bind("TripId,Name,Date,LocationId")] Trip trip)
+        public async Task<IActionResult> Edit(short id, [Bind("TripId,Name,StartDate,EndDate,UserId")] Trip trip)
         {
             if (id != trip.TripId)
             {
@@ -118,7 +118,7 @@ namespace TripEventPlanner.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["LocationId"] = new SelectList(_context.Locations, "LocationId", "City", trip.LocationId);
+            ViewData["UserId"] = new SelectList(_context.Users, "UserId", "Email", trip.UserId);
             return View(trip);
         }
 
@@ -131,7 +131,7 @@ namespace TripEventPlanner.Controllers
             }
 
             var trip = await _context.Trips
-                .Include(t => t.Location)
+                .Include(t => t.User)
                 .FirstOrDefaultAsync(m => m.TripId == id);
             if (trip == null)
             {

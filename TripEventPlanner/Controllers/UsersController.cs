@@ -22,8 +22,7 @@ namespace TripEventPlanner.Controllers
         // GET: Users
         public async Task<IActionResult> Index()
         {
-            var itravelPlannerDBContext = _context.Users.Include(u => u.Trip);
-            return View(await itravelPlannerDBContext.ToListAsync());
+            return View(await _context.Users.ToListAsync());
         }
 
         // GET: Users/Details/5
@@ -35,7 +34,6 @@ namespace TripEventPlanner.Controllers
             }
 
             var user = await _context.Users
-                .Include(u => u.Trip)
                 .FirstOrDefaultAsync(m => m.UserId == id);
             if (user == null)
             {
@@ -48,7 +46,6 @@ namespace TripEventPlanner.Controllers
         // GET: Users/Create
         public IActionResult Create()
         {
-            ViewData["TripId"] = new SelectList(_context.Trips, "TripId", "Name");
             return View();
         }
 
@@ -57,7 +54,7 @@ namespace TripEventPlanner.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("UserId,Name,Email,Password,TripId")] User user)
+        public async Task<IActionResult> Create([Bind("UserId,Name,Email,Password")] User user)
         {
             if (ModelState.IsValid)
             {
@@ -65,7 +62,6 @@ namespace TripEventPlanner.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["TripId"] = new SelectList(_context.Trips, "TripId", "Name", user.TripId);
             return View(user);
         }
 
@@ -82,7 +78,6 @@ namespace TripEventPlanner.Controllers
             {
                 return NotFound();
             }
-            ViewData["TripId"] = new SelectList(_context.Trips, "TripId", "Name", user.TripId);
             return View(user);
         }
 
@@ -91,7 +86,7 @@ namespace TripEventPlanner.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(short id, [Bind("UserId,Name,Email,Password,TripId")] User user)
+        public async Task<IActionResult> Edit(short id, [Bind("UserId,Name,Email,Password")] User user)
         {
             if (id != user.UserId)
             {
@@ -118,7 +113,6 @@ namespace TripEventPlanner.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["TripId"] = new SelectList(_context.Trips, "TripId", "Name", user.TripId);
             return View(user);
         }
 
@@ -131,7 +125,6 @@ namespace TripEventPlanner.Controllers
             }
 
             var user = await _context.Users
-                .Include(u => u.Trip)
                 .FirstOrDefaultAsync(m => m.UserId == id);
             if (user == null)
             {
