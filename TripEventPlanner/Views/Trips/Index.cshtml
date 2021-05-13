@@ -8,13 +8,13 @@
     <h1>My Trips</h1>
 </section>
 
-<section>
+<section class="flex">
     @foreach (var item in Model)
     {
         if (item.StartDate >= DateTime.Now || item.EndDate <= DateTime.Now)
         {
             <figure>
-                <img src="#" alt="Alternate Text" />
+                <img src="~/images/turkey.jpg" alt="Alternate Text" class="country-url"/>
                 <p>@Html.DisplayFor(modelItem => item.Name)</p>
             </figure>
             <p> @Html.DisplayFor(modelItem => item.StartDate) - @Html.DisplayFor(modelItem => item.EndDate)</p>
