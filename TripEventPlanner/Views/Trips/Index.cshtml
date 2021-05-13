@@ -1,4 +1,6 @@
 ﻿@model IEnumerable<TripEventPlanner.Models.Trip>
+@using TripEventPlanner.Models
+
 
 @{
     ViewData["Title"] = "Index";
@@ -16,7 +18,7 @@
         {
             <section class="flex-wrapper">
                 <figure>
-                    <img src="~/images/turkey.jpg" alt="Alternate Text" class="country-url" />
+                    <img src="~/images/countrry/japan.jpg" alt="Alternate Text" class="country-url" />
                     <figcaption>@Html.DisplayFor(modelItem => item.Name)</figcaption>
                 </figure>
                 <p> @Html.DisplayFor(modelItem => item.StartDate) - @Html.DisplayFor(modelItem => item.EndDate)</p>
@@ -24,7 +26,22 @@
         }
     }
 </section>
-
+<section>
+    <h2>Activities</h2>
+    @foreach (var item in Model)
+    {
+        if (item.StartDate >= DateTime.Now || item.EndDate <= DateTime.Now)
+        {
+            <section class="flex-wrapper">
+                <figure>
+                    <img src="~/images/activity/museum.jpg" alt="Alternate Text" class="country-url" />
+                    <figcaption>@Html.DisplayFor(modelItem => item.Name)</figcaption>
+                </figure>
+                <p> @Html.DisplayFor(modelItem => item.StartDate) - @Html.DisplayFor(modelItem => item.EndDate)</p>
+            </section>
+        }
+    }
+</section>
 @*
     <p>
         <a asp-action="AddActivity">Add Activity</a>
