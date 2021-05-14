@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TripEventPlanner.Data;
 using TripEventPlanner.Models;
+using TripEventPlanner.Models.ViewModels;
 
 namespace TripEventPlanner.Controllers
 {
@@ -25,6 +26,9 @@ namespace TripEventPlanner.Controllers
             //var itravelPlannerDBContext = _context.Trips.FirstOrDefault(t => t.TripId == id);
             //return View(itravelPlannerDBContext);
             var itravelPlannerDBContext = _context.Trips.Include(t => t.User);
+            CountryTripViewModel model = new CountryTripViewModel();
+
+            
             return View(await itravelPlannerDBContext.ToListAsync());
         }
 

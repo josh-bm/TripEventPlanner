@@ -498,3 +498,4 @@ E:\School Folder\PBA Webdevelopment\Semester1\Backendprogrammering\src\TripEvent
 E:\School Folder\PBA Webdevelopment\Semester1\Backendprogrammering\src\TripEventPlanner\TripEventPlanner\TripEventPlanner\obj\Debug\net5.0\Razor\Views\Activities\Edit.cshtml.g.cs
 E:\School Folder\PBA Webdevelopment\Semester1\Backendprogrammering\src\TripEventPlanner\TripEventPlanner\TripEventPlanner\obj\Debug\net5.0\Razor\Views\Activities\Index.cshtml.g.cs
 C:\Users\Joshua\Documents\GitHub\TripEventPlanner\TripEventPlanner\obj\Debug\net5.0\Razor\Views\Search\Index.cshtml.g.cs
+E:\School Folder\PBA Webdevelopment\Semester1\Backendprogrammering\src\TripEventPlanner\TripEventPlanner\TripEventPlanner\obj\Debug\net5.0\Razor\Views\Search\Index.cshtml.g.cs

@@ -8,21 +8,29 @@
 
 @using (Html.BeginForm("Index", "Activities", FormMethod.Get))
 {
+    <select name="ActivityType">
+        @foreach (var item in Model.GroupBy(a => a.ActivityType.Name))
+        {
+            <option value="@item.Key">
+                @item.Key
+            </option>
+
+        }
+
+    </select>
     //the following are search options
     @*<b> Search Option: </b>
-    @Html.RadioButton("option", "Name")<text>Name</text> 
-    @Html.RadioButton("option", "ActivityType") <text>ActivityType</text> 
-    @Html.RadioButton("option", "Location") <text> Location </text>
-    @Html.TextBox("search")*@
+        @Html.RadioButton("option", "Name")<text>Name</text>
+        @Html.RadioButton("option", "ActivityType") <text>ActivityType</text>
+        @Html.RadioButton("option", "Location") <text> Location </text>
+        @Html.TextBox("search")*@
 
-    
+
 
     <input type="submit" name="submit" value="Search" />
 }
 
-<select asp-items="ActivityType.ToList()" >
 
-</select>
 
 <table class="table">
     <thead>
