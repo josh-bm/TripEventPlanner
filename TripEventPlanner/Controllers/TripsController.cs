@@ -22,6 +22,8 @@ namespace TripEventPlanner.Controllers
         // GET: Trips
         public async Task<IActionResult> Index(int id)
         {
+            //var itravelPlannerDBContext = _context.Trips.FirstOrDefault(t => t.TripId == id);
+            //return View(itravelPlannerDBContext);
             var itravelPlannerDBContext = _context.Trips.Include(t => t.User);
             return View(await itravelPlannerDBContext.ToListAsync());
         }

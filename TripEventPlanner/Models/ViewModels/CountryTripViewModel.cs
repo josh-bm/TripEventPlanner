@@ -8,6 +8,6 @@ namespace TripEventPlanner.Models.ViewModels
     public class CountryTripViewModel
     {
         public Country Country { get; set; }
-        public List<Trip> Trips { get; set; }
+        public Trip Trips { get; set; }
     }
 }
