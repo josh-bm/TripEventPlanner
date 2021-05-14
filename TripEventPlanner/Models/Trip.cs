@@ -16,5 +16,15 @@ namespace TripEventPlanner.Models
 
         public virtual Country Country { get; set; }
         public virtual User User { get; set; }
+
+        private List<Activity> activities = new List<Activity>();
+
+        public void AddActivity(Activity activity)
+        {
+            activities.Add(activity);
+        }
+
+        public virtual void RemoveActivity(Activity activity) =>
+            activities.RemoveAll(a => a.ActivityId == activity.ActivityId);
     }
 }
