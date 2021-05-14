@@ -66,6 +66,33 @@ for details on configuring this project to bundle and minify static web assets. 
     width: 120px;
 }
 /* Home page end ------------------------------------------------------------------------------------ */
+.flex {
+    display: flex !important;
+}
+
+.flex-wrapper {
+    margin-right: 1em;
+}
+
+figure {
+    position: relative;
+    text-align: center;
+    width: 100%;
+}
+
+    figure img {
+        width: 100%;
+        filter: brightness(50%);
+    }
+
+figcaption {
+    position: absolute;
+    bottom: 8px;
+    right: 16px;
+    color: white;
+    font-size: 2em;
+}
+
 a.navbar-brand {
     white-space: normal;
     text-align: center;
@@ -92,7 +119,13 @@ a {
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-    font-size: 16px;
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
 }
 
 .border-top {
@@ -131,3 +164,4 @@ body {
     white-space: nowrap;
     line-height: 60px; /* Vertically center the text there */
 }
+

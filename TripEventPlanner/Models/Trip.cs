@@ -7,17 +7,24 @@ namespace TripEventPlanner.Models
 {
     public partial class Trip
     {
-        public Trip()
-        {
-            Users = new HashSet<User>();
-        }
-
         public short TripId { get; set; }
         public string Name { get; set; }
-        public DateTime Date { get; set; }
-        public short? LocationId { get; set; }
+        public DateTime? StartDate { get; set; }
+        public DateTime? EndDate { get; set; }
+        public short? CountryId { get; set; }
+        public short? UserId { get; set; }
 
-        public virtual Location Location { get; set; }
-        public virtual ICollection<User> Users { get; set; }
+        public virtual Country Country { get; set; }
+        public virtual User User { get; set; }
+
+        private List<Activity> activities = new List<Activity>();
+
+        public void AddActivity(Activity activity)
+        {
+            activities.Add(activity);
+        }
+
+        public virtual void RemoveActivity(Activity activity) =>
+            activities.RemoveAll(a => a.ActivityId == activity.ActivityId);
     }
 }

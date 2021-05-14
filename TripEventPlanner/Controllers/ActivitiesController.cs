@@ -20,10 +20,45 @@ namespace TripEventPlanner.Controllers
         }
 
         // GET: Activities
-        public async Task<IActionResult> Index()
+        //public async Task<IActionResult> Index(string option, string search)
+        //{
+        //var itravelPlannerDBContext = _context.Activities.Include(a => a.ActivityType).Include(a => a.Location);
+        //return View(await itravelPlannerDBContext.ToListAsync());
+        //}
+
+        public IActionResult Index()
         {
-            var itravelPlannerDBContext = _context.Activities.Include(a => a.ActivityType);
-            return View(await itravelPlannerDBContext.ToListAsync());
+            //var itravelPlannerDBContext = _context.Activities.Include(a => a.ActivityType).Include(a => a.Location);
+
+            // declare the list
+            List<SelectListItem> activityTypes = new List<SelectListItem>();
+            List<SelectListItem> locations = new List<SelectListItem>();
+
+            // generate the dropdown list
+            foreach (Activity activities in _context.Activities.Include(a => a.ActivityType).Include(a => a.Location))
+            {
+                activityTypes.Add(new SelectListItem
+                {
+                    Text = activities.ActivityType.Name,
+                    Value = activities.ActivityType.Name.ToString()
+                });
+            }
+
+            //if (option == "Activity")
+            //{
+            //    return View(_context.Activities
+            //        .Where(x => x.ActivityType.Name == search || search == null).ToList());
+            //}
+            //else if (option == "Location")
+            //{
+            //    return View(_context.Activities
+            //        .Where(x => x.Location.Name == search || search == null).ToList());
+            //}
+            //else
+            //{
+            //    return View(itravelPlannerDBContext.Where(x => x.Name.StartsWith(search) || search == null).ToList());
+            //}
+            return View();
         }
 
         // GET: Activities/Details/5
@@ -36,6 +71,7 @@ namespace TripEventPlanner.Controllers
 
             var activity = await _context.Activities
                 .Include(a => a.ActivityType)
+                .Include(a => a.Location)
                 .FirstOrDefaultAsync(m => m.ActivityId == id);
             if (activity == null)
             {
@@ -49,6 +85,7 @@ namespace TripEventPlanner.Controllers
         public IActionResult Create()
         {
             ViewData["ActivityTypeId"] = new SelectList(_context.ActivityTypes, "ActivityTypeId", "Name");
+            ViewData["LocationId"] = new SelectList(_context.Locations, "LocationId", "Name");
             return View();
         }
 
@@ -57,7 +94,7 @@ namespace TripEventPlanner.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ActivityId,Name,Description,Adress,Date,Price,ActivityTypeId")] Activity activity)
+        public async Task<IActionResult> Create([Bind("ActivityId,Name,Description,Address,Price,ActivityTypeId,ImageUrl,StartDate,EndDate,LocationId")] Activity activity)
         {
             if (ModelState.IsValid)
             {
@@ -66,6 +103,7 @@ namespace TripEventPlanner.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ActivityTypeId"] = new SelectList(_context.ActivityTypes, "ActivityTypeId", "Name", activity.ActivityTypeId);
+            ViewData["LocationId"] = new SelectList(_context.Locations, "LocationId", "Name", activity.LocationId);
             return View(activity);
         }
 
@@ -83,6 +121,7 @@ namespace TripEventPlanner.Controllers
                 return NotFound();
             }
             ViewData["ActivityTypeId"] = new SelectList(_context.ActivityTypes, "ActivityTypeId", "Name", activity.ActivityTypeId);
+            ViewData["LocationId"] = new SelectList(_context.Locations, "LocationId", "Name", activity.LocationId);
             return View(activity);
         }
 
@@ -91,7 +130,7 @@ namespace TripEventPlanner.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(short id, [Bind("ActivityId,Name,Description,Adress,Date,Price,ActivityTypeId")] Activity activity)
+        public async Task<IActionResult> Edit(short id, [Bind("ActivityId,Name,Description,Address,Price,ActivityTypeId,ImageUrl,StartDate,EndDate,LocationId")] Activity activity)
         {
             if (id != activity.ActivityId)
             {
@@ -119,6 +158,7 @@ namespace TripEventPlanner.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ActivityTypeId"] = new SelectList(_context.ActivityTypes, "ActivityTypeId", "Name", activity.ActivityTypeId);
+            ViewData["LocationId"] = new SelectList(_context.Locations, "LocationId", "Name", activity.LocationId);
             return View(activity);
         }
 
@@ -132,6 +172,7 @@ namespace TripEventPlanner.Controllers
 
             var activity = await _context.Activities
                 .Include(a => a.ActivityType)
+                .Include(a => a.Location)
                 .FirstOrDefaultAsync(m => m.ActivityId == id);
             if (activity == null)
             {

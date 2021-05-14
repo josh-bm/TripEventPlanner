@@ -9,15 +9,14 @@ namespace TripEventPlanner.Models
     {
         public Location()
         {
-            Trips = new HashSet<Trip>();
+            Activities = new HashSet<Activity>();
         }
 
         public short LocationId { get; set; }
         public string Name { get; set; }
-        public string City { get; set; }
-        public short? CountryId { get; set; }
+        public short CountryId { get; set; }
 
         public virtual Country Country { get; set; }
-        public virtual ICollection<Trip> Trips { get; set; }
+        public virtual ICollection<Activity> Activities { get; set; }
     }
 }

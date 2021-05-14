@@ -22,7 +22,6 @@ namespace TripEventPlanner.Data
         public virtual DbSet<ActivityType> ActivityTypes { get; set; }
         public virtual DbSet<Country> Countries { get; set; }
         public virtual DbSet<Location> Locations { get; set; }
-        public virtual DbSet<LocationActivity> LocationActivities { get; set; }
         public virtual DbSet<Trip> Trips { get; set; }
         public virtual DbSet<User> Users { get; set; }
 
@@ -47,21 +46,24 @@ namespace TripEventPlanner.Data
 
                 entity.Property(e => e.ActivityTypeId).HasColumnName("activityType_id");
 
-                entity.Property(e => e.Adress)
-                    .IsRequired()
+                entity.Property(e => e.Address)
                     .HasMaxLength(128)
                     .IsUnicode(false)
-                    .HasColumnName("adress");
-
-                entity.Property(e => e.Date)
-                    .HasColumnType("datetime")
-                    .HasColumnName("date");
+                    .HasColumnName("address");
 
                 entity.Property(e => e.Description)
-                    .IsRequired()
-                    .HasMaxLength(128)
                     .IsUnicode(false)
                     .HasColumnName("description");
+
+                entity.Property(e => e.EndDate)
+                    .HasColumnType("date")
+                    .HasColumnName("end_date");
+
+                entity.Property(e => e.ImageUrl)
+                    .IsUnicode(false)
+                    .HasColumnName("image_url");
+
+                entity.Property(e => e.LocationId).HasColumnName("location_id");
 
                 entity.Property(e => e.Name)
                     .IsRequired()
@@ -73,10 +75,19 @@ namespace TripEventPlanner.Data
                     .HasColumnType("decimal(7, 2)")
                     .HasColumnName("price");
 
+                entity.Property(e => e.StartDate)
+                    .HasColumnType("date")
+                    .HasColumnName("start_date");
+
                 entity.HasOne(d => d.ActivityType)
                     .WithMany(p => p.Activities)
                     .HasForeignKey(d => d.ActivityTypeId)
                     .HasConstraintName("FK_activity_activityType");
+
+                entity.HasOne(d => d.Location)
+                    .WithMany(p => p.Activities)
+                    .HasForeignKey(d => d.LocationId)
+                    .HasConstraintName("FK_Activity_Location");
             });
 
             modelBuilder.Entity<ActivityType>(entity =>
@@ -98,6 +109,11 @@ namespace TripEventPlanner.Data
 
                 entity.Property(e => e.CountryId).HasColumnName("country_id");
 
+                entity.Property(e => e.ImageUrl)
+                    .HasMaxLength(128)
+                    .IsUnicode(false)
+                    .HasColumnName("image_url");
+
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(128)
@@ -107,13 +123,9 @@ namespace TripEventPlanner.Data
 
             modelBuilder.Entity<Location>(entity =>
             {
-                entity.Property(e => e.LocationId).HasColumnName("location_id");
+                entity.ToTable("Location");
 
-                entity.Property(e => e.City)
-                    .IsRequired()
-                    .HasMaxLength(128)
-                    .IsUnicode(false)
-                    .HasColumnName("city");
+                entity.Property(e => e.LocationId).HasColumnName("location_id");
 
                 entity.Property(e => e.CountryId).HasColumnName("country_id");
 
@@ -126,30 +138,8 @@ namespace TripEventPlanner.Data
                 entity.HasOne(d => d.Country)
                     .WithMany(p => p.Locations)
                     .HasForeignKey(d => d.CountryId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_location_country");
-            });
-
-            modelBuilder.Entity<LocationActivity>(entity =>
-            {
-                entity.HasNoKey();
-
-                entity.ToTable("LocationActivity");
-
-                entity.Property(e => e.ActivityId).HasColumnName("activity_id");
-
-                entity.Property(e => e.LocationId).HasColumnName("location_id");
-
-                entity.HasOne(d => d.Activity)
-                    .WithMany()
-                    .HasForeignKey(d => d.ActivityId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_activity_location");
-
-                entity.HasOne(d => d.Location)
-                    .WithMany()
-                    .HasForeignKey(d => d.LocationId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_location_activity");
             });
 
             modelBuilder.Entity<Trip>(entity =>
@@ -158,11 +148,11 @@ namespace TripEventPlanner.Data
 
                 entity.Property(e => e.TripId).HasColumnName("trip_id");
 
-                entity.Property(e => e.Date)
-                    .HasColumnType("datetime")
-                    .HasColumnName("date");
+                entity.Property(e => e.CountryId).HasColumnName("country_id");
 
-                entity.Property(e => e.LocationId).HasColumnName("location_id");
+                entity.Property(e => e.EndDate)
+                    .HasColumnType("date")
+                    .HasColumnName("end_date");
 
                 entity.Property(e => e.Name)
                     .IsRequired()
@@ -170,10 +160,21 @@ namespace TripEventPlanner.Data
                     .IsUnicode(false)
                     .HasColumnName("name");
 
-                entity.HasOne(d => d.Location)
+                entity.Property(e => e.StartDate)
+                    .HasColumnType("date")
+                    .HasColumnName("start_date");
+
+                entity.Property(e => e.UserId).HasColumnName("user_id");
+
+                entity.HasOne(d => d.Country)
                     .WithMany(p => p.Trips)
-                    .HasForeignKey(d => d.LocationId)
-                    .HasConstraintName("FK_trip_location");
+                    .HasForeignKey(d => d.CountryId)
+                    .HasConstraintName("FK_Trip_Country");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.Trips)
+                    .HasForeignKey(d => d.UserId)
+                    .HasConstraintName("FK_Trip_Users");
             });
 
             modelBuilder.Entity<User>(entity =>
@@ -197,13 +198,6 @@ namespace TripEventPlanner.Data
                     .HasMaxLength(128)
                     .IsUnicode(false)
                     .HasColumnName("password");
-
-                entity.Property(e => e.TripId).HasColumnName("trip_id");
-
-                entity.HasOne(d => d.Trip)
-                    .WithMany(p => p.Users)
-                    .HasForeignKey(d => d.TripId)
-                    .HasConstraintName("FK_user_trip");
             });
 
             OnModelCreatingPartial(modelBuilder);
