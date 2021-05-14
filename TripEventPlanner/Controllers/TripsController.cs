@@ -22,11 +22,9 @@ namespace TripEventPlanner.Controllers
         // GET: Trips
         public async Task<IActionResult> Index(int id)
         {
-            
             var itravelPlannerDBContext = _context.Trips.Include(t => t.User);
             return View(await itravelPlannerDBContext.ToListAsync());
         }
-        
 
         // GET: Trips/Details/5
         public async Task<IActionResult> Details(short? id)
@@ -70,7 +68,6 @@ namespace TripEventPlanner.Controllers
             ViewData["UserId"] = new SelectList(_context.Users, "UserId", "Email", trip.UserId);
             return View(trip);
         }
-
 
         // GET: Trips/Edit/5
         public async Task<IActionResult> Edit(short? id)

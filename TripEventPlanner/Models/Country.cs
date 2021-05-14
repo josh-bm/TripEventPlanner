@@ -10,6 +10,7 @@ namespace TripEventPlanner.Models
         public Country()
         {
             Locations = new HashSet<Location>();
+            Trips = new HashSet<Trip>();
         }
 
         public short CountryId { get; set; }
@@ -17,5 +18,6 @@ namespace TripEventPlanner.Models
         public string ImageUrl { get; set; }
 
         public virtual ICollection<Location> Locations { get; set; }
+        public virtual ICollection<Trip> Trips { get; set; }
     }
 }

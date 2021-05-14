@@ -23,7 +23,6 @@ namespace TripEventPlanner.Data
         public virtual DbSet<Country> Countries { get; set; }
         public virtual DbSet<Location> Locations { get; set; }
         public virtual DbSet<Trip> Trips { get; set; }
-        public virtual DbSet<TripCountry> TripCountries { get; set; }
         public virtual DbSet<User> Users { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -149,6 +148,8 @@ namespace TripEventPlanner.Data
 
                 entity.Property(e => e.TripId).HasColumnName("trip_id");
 
+                entity.Property(e => e.CountryId).HasColumnName("country_id");
+
                 entity.Property(e => e.EndDate)
                     .HasColumnType("date")
                     .HasColumnName("end_date");
@@ -165,33 +166,15 @@ namespace TripEventPlanner.Data
 
                 entity.Property(e => e.UserId).HasColumnName("user_id");
 
+                entity.HasOne(d => d.Country)
+                    .WithMany(p => p.Trips)
+                    .HasForeignKey(d => d.CountryId)
+                    .HasConstraintName("FK_Trip_Country");
+
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Trips)
                     .HasForeignKey(d => d.UserId)
                     .HasConstraintName("FK_Trip_Users");
-            });
-
-            modelBuilder.Entity<TripCountry>(entity =>
-            {
-                entity.HasNoKey();
-
-                entity.ToTable("TripCountry");
-
-                entity.Property(e => e.CountryId).HasColumnName("country_id");
-
-                entity.Property(e => e.TripId).HasColumnName("trip_id");
-
-                entity.HasOne(d => d.Country)
-                    .WithMany()
-                    .HasForeignKey(d => d.CountryId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_TripCountry_Country");
-
-                entity.HasOne(d => d.Trip)
-                    .WithMany()
-                    .HasForeignKey(d => d.TripId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_TripCountry_Trip");
             });
 
             modelBuilder.Entity<User>(entity =>
