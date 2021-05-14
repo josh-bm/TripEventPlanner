@@ -19,47 +19,52 @@ namespace TripEventPlanner.Controllers
             _context = context;
         }
 
-        // GET: Activities
-        //public async Task<IActionResult> Index(string option, string search)
+        //GET: Activities
+        //public async Task<IActionResult> Index()
         //{
-        //var itravelPlannerDBContext = _context.Activities.Include(a => a.ActivityType).Include(a => a.Location);
-        //return View(await itravelPlannerDBContext.ToListAsync());
+          //  var itravelPlannerDBContext = _context.Activities.Include(a => a.ActivityType).Include(a => a.Location);
+        //    return View(await itravelPlannerDBContext.ToListAsync());
         //}
 
-        public IActionResult Index()
+        public IActionResult Index(string option, string search)
         {
-            //var itravelPlannerDBContext = _context.Activities.Include(a => a.ActivityType).Include(a => a.Location);
-
-            // declare the list
-            List<SelectListItem> activityTypes = new List<SelectListItem>();
-            List<SelectListItem> locations = new List<SelectListItem>();
-
-            // generate the dropdown list
-            foreach (Activity activities in _context.Activities.Include(a => a.ActivityType).Include(a => a.Location))
+            var itravelPlannerDBContext = _context.Activities.Include(a => a.ActivityType).Include(a => a.Location);
+            if (option == "Activity")
             {
-                activityTypes.Add(new SelectListItem
-                {
-                    Text = activities.ActivityType.Name,
-                    Value = activities.ActivityType.Name.ToString()
-                });
+                return View(_context.Activities
+                    .Where(x => x.ActivityType.Name == search || search == null).ToList());
+            }
+            else if (option == "Location")
+            {
+                return View(_context.Activities
+                    .Where(x => x.Location.Name == search || search == null).ToList());
+            }
+            else
+            {
+                return View(itravelPlannerDBContext.Where(x => x.Name.StartsWith(search) || search == null).ToList());
             }
 
-            //if (option == "Activity")
-            //{
-            //    return View(_context.Activities
-            //        .Where(x => x.ActivityType.Name == search || search == null).ToList());
+            // declare the list
+            // List<SelectListItem> activityTypes = new List<SelectListItem>();
+            //List<SelectListItem> locations = new List<SelectListItem>();
+
+            // generate the dropdown list
+            // foreach (Activity activities in _context.Activities.Include(a => a.ActivityType).Include(a => a.Location))
+            // {
+            //   activityTypes.Add(new SelectListItem
+            //   {
+            //       Text = activities.ActivityType.Name,
+            //  Value = activities.ActivityType.Name.ToString()
+            //  });
             //}
-            //else if (option == "Location")
-            //{
-            //    return View(_context.Activities
-            //        .Where(x => x.Location.Name == search || search == null).ToList());
-            //}
-            //else
-            //{
-            //    return View(itravelPlannerDBContext.Where(x => x.Name.StartsWith(search) || search == null).ToList());
-            //}
-            return View();
+
+            //return View();
         }
+
+        //[HttpPost]
+        //public IActionResult Index(short? activityId)
+        //{
+        //}
 
         // GET: Activities/Details/5
         public async Task<IActionResult> Details(short? id)
