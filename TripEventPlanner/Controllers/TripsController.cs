@@ -25,10 +25,11 @@ namespace TripEventPlanner.Controllers
         {
             //var itravelPlannerDBContext = _context.Trips.FirstOrDefault(t => t.TripId == id);
             //return View(itravelPlannerDBContext);
-            var itravelPlannerDBContext = _context.Trips.Include(t => t.User);
-            CountryTripViewModel model = new CountryTripViewModel();
+            var itravelPlannerDBContext = _context.Trips.Where(t => t.UserId == id)
+                .Include(a => a.Country)
+                .ThenInclude(c => c.Locations)
+                .ThenInclude(m => m.Activities);
 
-            
             return View(await itravelPlannerDBContext.ToListAsync());
         }
 
