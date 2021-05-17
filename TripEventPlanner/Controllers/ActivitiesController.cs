@@ -8,69 +8,43 @@ using Microsoft.EntityFrameworkCore;
 using TripEventPlanner.Data;
 using TripEventPlanner.Models;
 
-namespace TripEventPlanner.Controllers
-{
-    public class ActivitiesController : Controller
-    {
+namespace TripEventPlanner.Controllers {
+    public class ActivitiesController : Controller {
         private readonly ItravelPlannerDBContext _context;
 
-        public ActivitiesController(ItravelPlannerDBContext context)
-        {
+        public ActivitiesController( ItravelPlannerDBContext context ) {
             _context = context;
         }
 
-        //GET: Activities
-        //public async Task<IActionResult> Index()
-        //{
-          //  var itravelPlannerDBContext = _context.Activities.Include(a => a.ActivityType).Include(a => a.Location);
-        //    return View(await itravelPlannerDBContext.ToListAsync());
-        //}
+        public async Task<IActionResult> Index( string searchString, string activityType ) {
 
-        public IActionResult Index(string option, string search)
-        {
-            var itravelPlannerDBContext = _context.Activities.Include(a => a.ActivityType).Include(a => a.Location);
-            if (option == "Activity")
-            {
-                return View(_context.Activities
-                    .Where(x => x.ActivityType.Name == search || search == null).ToList());
+            ViewData["CurrentFilter"] = searchString;
+            ViewData["activityTypeFilter"] = activityType;
+
+            var query = _context.Activities
+                    .Where(s => s.Name.Contains(searchString) && s.ActivityType.Name.Contains(activityType))
+                    .Include(a => a.Location)
+                    .Include(s => s.ActivityType);
+
+            var activity = _context.Activities.Include(a => a.ActivityType).Include(a => a.Location).Include(s => s.ActivityType);
+            var stringEmty = !String.IsNullOrEmpty(searchString);
+
+            if( activityType == "Attraction" & stringEmty ) {
+                activity = query;
             }
-            else if (option == "Location")
-            {
-                return View(_context.Activities
-                    .Where(x => x.Location.Name == search || search == null).ToList());
+            if( activityType == "Event" & stringEmty ) {
+                activity = query;
             }
-            else
-            {
-                return View(itravelPlannerDBContext.Where(x => x.Name.StartsWith(search) || search == null).ToList());
+            if( activityType == "Restaurant" & stringEmty ) {
+                activity = query;
             }
 
-            // declare the list
-            // List<SelectListItem> activityTypes = new List<SelectListItem>();
-            //List<SelectListItem> locations = new List<SelectListItem>();
-
-            // generate the dropdown list
-            // foreach (Activity activities in _context.Activities.Include(a => a.ActivityType).Include(a => a.Location))
-            // {
-            //   activityTypes.Add(new SelectListItem
-            //   {
-            //       Text = activities.ActivityType.Name,
-            //  Value = activities.ActivityType.Name.ToString()
-            //  });
-            //}
-
-            //return View();
+            return View(await activity.AsNoTracking().ToListAsync());
         }
 
-        //[HttpPost]
-        //public IActionResult Index(short? activityId)
-        //{
-        //}
-
         // GET: Activities/Details/5
-        public async Task<IActionResult> Details(short? id)
-        {
-            if (id == null)
-            {
+        public async Task<IActionResult> Details( short? id ) {
+            if( id == null ) {
                 return NotFound();
             }
 
@@ -78,8 +52,7 @@ namespace TripEventPlanner.Controllers
                 .Include(a => a.ActivityType)
                 .Include(a => a.Location)
                 .FirstOrDefaultAsync(m => m.ActivityId == id);
-            if (activity == null)
-            {
+            if( activity == null ) {
                 return NotFound();
             }
 
@@ -87,8 +60,7 @@ namespace TripEventPlanner.Controllers
         }
 
         // GET: Activities/Create
-        public IActionResult Create()
-        {
+        public IActionResult Create() {
             ViewData["ActivityTypeId"] = new SelectList(_context.ActivityTypes, "ActivityTypeId", "Name");
             ViewData["LocationId"] = new SelectList(_context.Locations, "LocationId", "Name");
             return View();
@@ -99,10 +71,8 @@ namespace TripEventPlanner.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ActivityId,Name,Description,Address,Price,ActivityTypeId,ImageUrl,StartDate,EndDate,LocationId")] Activity activity)
-        {
-            if (ModelState.IsValid)
-            {
+        public async Task<IActionResult> Create( [Bind("ActivityId,Name,Description,Address,Price,ActivityTypeId,ImageUrl,StartDate,EndDate,LocationId")] Activity activity ) {
+            if( ModelState.IsValid ) {
                 _context.Add(activity);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -113,16 +83,13 @@ namespace TripEventPlanner.Controllers
         }
 
         // GET: Activities/Edit/5
-        public async Task<IActionResult> Edit(short? id)
-        {
-            if (id == null)
-            {
+        public async Task<IActionResult> Edit( short? id ) {
+            if( id == null ) {
                 return NotFound();
             }
 
             var activity = await _context.Activities.FindAsync(id);
-            if (activity == null)
-            {
+            if( activity == null ) {
                 return NotFound();
             }
             ViewData["ActivityTypeId"] = new SelectList(_context.ActivityTypes, "ActivityTypeId", "Name", activity.ActivityTypeId);
@@ -135,28 +102,20 @@ namespace TripEventPlanner.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(short id, [Bind("ActivityId,Name,Description,Address,Price,ActivityTypeId,ImageUrl,StartDate,EndDate,LocationId")] Activity activity)
-        {
-            if (id != activity.ActivityId)
-            {
+        public async Task<IActionResult> Edit( short id, [Bind("ActivityId,Name,Description,Address,Price,ActivityTypeId,ImageUrl,StartDate,EndDate,LocationId")] Activity activity ) {
+            if( id != activity.ActivityId ) {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
+            if( ModelState.IsValid ) {
+                try {
                     _context.Update(activity);
                     await _context.SaveChangesAsync();
                 }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ActivityExists(activity.ActivityId))
-                    {
+                catch( DbUpdateConcurrencyException ) {
+                    if( !ActivityExists(activity.ActivityId) ) {
                         return NotFound();
-                    }
-                    else
-                    {
+                    } else {
                         throw;
                     }
                 }
@@ -168,10 +127,8 @@ namespace TripEventPlanner.Controllers
         }
 
         // GET: Activities/Delete/5
-        public async Task<IActionResult> Delete(short? id)
-        {
-            if (id == null)
-            {
+        public async Task<IActionResult> Delete( short? id ) {
+            if( id == null ) {
                 return NotFound();
             }
 
@@ -179,8 +136,7 @@ namespace TripEventPlanner.Controllers
                 .Include(a => a.ActivityType)
                 .Include(a => a.Location)
                 .FirstOrDefaultAsync(m => m.ActivityId == id);
-            if (activity == null)
-            {
+            if( activity == null ) {
                 return NotFound();
             }
 
@@ -190,16 +146,14 @@ namespace TripEventPlanner.Controllers
         // POST: Activities/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(short id)
-        {
+        public async Task<IActionResult> DeleteConfirmed( short id ) {
             var activity = await _context.Activities.FindAsync(id);
             _context.Activities.Remove(activity);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ActivityExists(short id)
-        {
+        private bool ActivityExists( short id ) {
             return _context.Activities.Any(e => e.ActivityId == id);
         }
     }
