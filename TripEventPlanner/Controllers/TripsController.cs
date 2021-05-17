@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TripEventPlanner.Data;
 using TripEventPlanner.Models;
-using TripEventPlanner.Models.ViewModels;
 
 namespace TripEventPlanner.Controllers
 {
