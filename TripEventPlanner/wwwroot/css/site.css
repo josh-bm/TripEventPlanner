@@ -66,6 +66,79 @@ for details on configuring this project to bundle and minify static web assets. 
     width: 120px;
 }
 /* Home page end ------------------------------------------------------------------------------------ */
+
+
+/* activity page ------------------------------------------------------------------------------------ */
+
+.form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-container {
+    background: rgba(86, 204, 242, 0.38);
+    width: 80vw;
+    padding: 15px 10px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.form__input {
+    margin-right: 5px;
+    color: black;
+    border: none;
+    padding: 5px 0 5px 30px;
+    border-radius: 5px;
+    width: 35vw;
+    height: 40px;
+}
+
+.form__input-container {
+    position: relative;
+}
+
+.form__location {
+    padding: 5px 0 5px 30px;
+    width: 35vw;
+    border: none;
+    height: 40px;
+    border-radius: 5px;
+}
+
+.form__actions {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+    .form__actions:after {
+        content: "";
+        width: 30px;
+        height: 30px;
+        background: url(/images/icons/Search_Icon.svg) no-repeat;
+        top: 50%;
+        right: 0;
+        position: absolute;
+        background-size: 30px 30px;
+        transform: translateX(-50%);
+    }
+
+button:focus {
+    outline: none !important;
+    border: none !important;
+    box-shadow:none !important;
+}
+
+/* activity page end ------------------------------------------------------------------------------------ */
+
+
+
+
+
 .flex {
     display: flex !important;
 }
