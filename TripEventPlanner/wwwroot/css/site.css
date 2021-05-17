@@ -109,6 +109,15 @@ for details on configuring this project to bundle and minify static web assets. 
     border-radius: 5px;
 }
 
+.form__activity {
+    display: flex;
+    margin: 5px auto;
+    width: 35vw;
+    border: none;
+    padding: 10px;
+    background: rgba(86, 204, 242, 0.38);
+}
+
 .form__actions {
     position: absolute;
     right: 0;
@@ -127,17 +136,39 @@ for details on configuring this project to bundle and minify static web assets. 
         transform: translateX(-50%);
     }
 
-button:focus {
-    outline: none !important;
-    border: none !important;
-    box-shadow:none !important;
+.activity__button {
+    font-size: 21px;
+    font-weight: bold;
 }
+
+.activity{
+
+}
+.activity__item {
+
+}
+.activity__item::marker {
+    position:absolute;
+    top: 0;
+    right: 0;
+
+}
+
+.activity__img {
+    width: 150px;
+    height: 150px;
+}
+
 
 /* activity page end ------------------------------------------------------------------------------------ */
 
 
 
-
+button:focus {
+    outline: none !important;
+    border: none !important;
+    box-shadow: none !important;
+}
 
 .flex {
     display: flex !important;
