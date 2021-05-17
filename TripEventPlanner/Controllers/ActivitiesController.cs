@@ -26,24 +26,63 @@ namespace TripEventPlanner.Controllers {
             ViewData["locationFilter"] = locationData;
             ViewData["location"] = location;
 
-            var query = _context.Activities
-                    .Where(s => s.Name.Contains(searchString) && s.ActivityType.Name.Contains(activityType))
-                    .Include(a => a.Location).Where(s => location == s.Location.Name)
-                    //.Where(n => n.Location.Name == location)
-                    .Include(s => s.ActivityType);
-
-            var activity = _context.Activities.Include(a => a.ActivityType).Include(a => a.Location).Include(s => s.ActivityType);
             var stringEmty = !String.IsNullOrEmpty(searchString);
 
-            if( activityType == "Attraction" & stringEmty ) {
-                activity = query;
+            var queryType = _context.Activities
+                   .Include(a => a.ActivityType).Where(s => activityType == s.ActivityType.Name)
+                   .Include(a => a.Location)
+                   .Include(s => s.ActivityType);
+            var queryLocation = _context.Activities
+                   .Include(a => a.ActivityType)
+                   .Include(a => a.Location).Where(s => location == s.Location.Name)
+                   .Include(s => s.ActivityType);
+            var queryAll = _context.Activities
+                    .Include(a => a.ActivityType).Where(s => activityType == s.ActivityType.Name)
+                   .Include(a => a.Location).Where(s => location == s.Location.Name)
+                   .Include(s => s.ActivityType);
+            var activity = _context.Activities
+                .Include(a => a.ActivityType)
+                .Include(a => a.Location)
+                .Include(s => s.ActivityType);
+
+
+            if( String.IsNullOrEmpty(searchString) & activityType != "All" & location != "All" ) {
+                activity = queryAll;
             }
-            if( activityType == "Event" & stringEmty ) {
-                activity = query;
+            if( String.IsNullOrEmpty(searchString) & activityType == "All" & location != "All" ) {
+                activity = queryLocation;
             }
-            if( activityType == "Restaurant" & stringEmty ) {
-                activity = query;
+            if( String.IsNullOrEmpty(searchString) & activityType != "All" & location == "All" ) {
+                activity = queryType;
             }
+            if( activityType == "All" & location == "All" & stringEmty ) {
+                activity = _context.Activities
+                    .Where(s => s.Name.Contains(searchString))
+                    .Include(a => a.Location)
+                    .Include(s => s.ActivityType);
+            }
+
+            if( activityType != "All" & location != "All" & stringEmty ) {
+                activity = _context.Activities
+                    .Where(s => s.Name.Contains(searchString) && s.ActivityType.Name.Contains(activityType))
+                    .Include(a => a.Location).Where(s => location == s.Location.Name)
+                    .Include(s => s.ActivityType);
+            }
+            if( activityType != "All" & location == "All" & stringEmty ) {
+                activity = _context.Activities
+                    .Where(s => s.Name.Contains(searchString) && s.ActivityType.Name.Contains(activityType))
+                    .Include(a => a.Location)
+                    .Include(s => s.ActivityType);
+            }
+            if( activityType == "All" & location != "All" & stringEmty ) {
+                activity = _context.Activities
+                    .Where(s => s.Name.Contains(searchString) && s.Location.Name.Contains(location))
+                    .Include(a => a.Location)
+                    .Include(s => s.ActivityType);
+            }
+
+
+
 
             return View(await activity.AsNoTracking().ToListAsync());
         }

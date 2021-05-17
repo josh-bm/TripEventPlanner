@@ -27,6 +27,7 @@
 
         </select>
         <select name="location" value="@ViewData["location"]">
+            <option>All</option>
             @foreach (var location in (IEnumerable<Location>)ViewData["locationFilter"])
             {
                 <option>@location.Name</option>
@@ -34,10 +35,6 @@
 
         </select>
     </form>
-
-
-
-    <input type="submit" name="submit" value="Search" />
 }
 
 
