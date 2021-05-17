@@ -4,11 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
-@*@foreach (var type in Model)
-    {
-        <h1>@type.ActivityType.Name</h1>
-    }*@
-@*<h1>@ViewData["activityTypeFilter"]</h1>*@
+
 
 <h1>Activity</h1>
 
@@ -22,27 +18,22 @@
                 <a asp-action="Index">Back to Full List</a>
             </p>
         </div>
-        <select name="activityType" value="@ViewData["activityTypeFilter"]">
-            <option>Attraction</option>
-            <option>Event</option>
-            <option>Restaurant</option>
+        <select name="activityType" value="@ViewData["activityType"]">
+            <option>All</option>
+            @foreach (var type in (IEnumerable<ActivityType>)ViewData["activityTypeFilter"])
+            {
+                <option>@type.Name</option>
             }
+
+        </select>
+        <select name="location" value="@ViewData["location"]">
+            @foreach (var location in (IEnumerable<Location>)ViewData["locationFilter"])
+            {
+                <option>@location.Name</option>
+            }
+
         </select>
     </form>
-    @*<select name="ActivityType">
-        @foreach (var item in Model)
-        {
-            <option value="">
-            </option>
-
-        </select>*@
-
-    //the following are search options
-    @*<b> Search Option: </b>
-        @Html.RadioButton("option", "Name")<text>Name</text>
-        @Html.RadioButton("option", "ActivityType") <text>ActivityType</text>
-        @Html.RadioButton("option", "Location") <text> Location </text>
-        @Html.TextBox("search")*@
 
 
 

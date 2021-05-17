@@ -16,14 +16,20 @@ namespace TripEventPlanner.Controllers {
             _context = context;
         }
 
-        public async Task<IActionResult> Index( string searchString, string activityType ) {
+        public async Task<IActionResult> Index( string searchString, string activityType, string location ) {
 
             ViewData["CurrentFilter"] = searchString;
-            ViewData["activityTypeFilter"] = activityType;
+            var activityTypeData = _context.ActivityTypes;
+            ViewData["activityTypeFilter"] = activityTypeData;
+            ViewData["activituType"] = activityType;
+            var locationData = _context.Locations;
+            ViewData["locationFilter"] = locationData;
+            ViewData["location"] = location;
 
             var query = _context.Activities
                     .Where(s => s.Name.Contains(searchString) && s.ActivityType.Name.Contains(activityType))
-                    .Include(a => a.Location)
+                    .Include(a => a.Location).Where(s => location == s.Location.Name)
+                    //.Where(n => n.Location.Name == location)
                     .Include(s => s.ActivityType);
 
             var activity = _context.Activities.Include(a => a.ActivityType).Include(a => a.Location).Include(s => s.ActivityType);
