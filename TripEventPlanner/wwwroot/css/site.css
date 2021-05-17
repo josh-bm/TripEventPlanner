@@ -72,6 +72,7 @@ for details on configuring this project to bundle and minify static web assets. 
 
 .flex-wrapper {
     margin-right: 1em;
+    width: 500px
 }
 
 figure {
@@ -164,4 +165,3 @@ body {
     white-space: nowrap;
     line-height: 60px; /* Vertically center the text there */
 }
-

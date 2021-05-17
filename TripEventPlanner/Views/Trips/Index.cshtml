@@ -8,40 +8,41 @@
     <h1>My Trips</h1>
 </section>
 
-<section class="flex">
-    @foreach (var item in Model)
-    {
-        if (item.StartDate >= DateTime.Now || item.EndDate <= DateTime.Now)
+@foreach (var item in Model)
+{
+    <section class="flex">
+        @*if (@item.StartDate > DateTime.Now & @item.EndDate < DateTime.Now)*@
+        @if (item.StartDate > DateTime.Now)
         {
             <section class="flex-wrapper">
                 <figure>
-                    <img src="#" alt="Alternate Text" class="" />
+                    <img src="@Html.DisplayFor(modelItem => item.Country.ImageUrl)" alt="Alternate Text" class="" />
                     <figcaption>@Html.DisplayFor(modelItem => item.Name)</figcaption>
                 </figure>
                 <p> @Html.DisplayFor(modelItem => item.StartDate) - @Html.DisplayFor(modelItem => item.EndDate)</p>
             </section>
 
         }
-    }
-</section>
-<section>
-    <h2>Activities</h2>
-    @foreach (var item in Model)
-    {
-        if (item.StartDate >= DateTime.Now || item.EndDate <= DateTime.Now)
-        {
-            <section class="flex-wrapper">
-                <figure>
-                    <img src="~/images/activity/museum.jpg" alt="Alternate Text" class="country-url" />
-                    <figcaption>@Html.DisplayFor(modelItem => item.Name)</figcaption>
-                </figure>
-                <p> @Html.DisplayFor(modelItem => item.StartDate) - @Html.DisplayFor(modelItem => item.EndDate)</p>
-            </section>
+    </section>
 
-            <button asp-action="Home"></button>
+
+    <section>
+        @foreach (var location in item.Country.Locations)
+        {
+            <h1>@location.Name</h1>
+
+            @foreach (var hej in location.Activities)
+            {
+                <h3>@hej.Name</h3>
+                <h3>@hej.Description</h3>
+            }
+
         }
-    }
-</section>
+
+        @*<button asp-action="Home"></button>*@
+
+    </section>
+}
 
 @*
     <p>
