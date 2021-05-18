@@ -16,12 +16,14 @@ namespace TripEventPlanner.Controllers {
             _context = context;
         }
 
-        public async Task<IActionResult> Index( string searchString, string activityType, string location ) {
+        public async Task<IActionResult> Index( string searchString, string activityType, string location, string mad) {
 
             ViewData["CurrentFilter"] = searchString;
+
             var activityTypeData = _context.ActivityTypes;
             ViewData["activityTypeFilter"] = activityTypeData;
             ViewData["activituType"] = activityType;
+
             var locationData = _context.Locations;
             ViewData["locationFilter"] = locationData;
             ViewData["location"] = location;
@@ -86,9 +88,14 @@ namespace TripEventPlanner.Controllers {
 
             return View(await activity.AsNoTracking().ToListAsync());
         }
+        //public async Task<IActionResult> hej(string type) {
 
-        // GET: Activities/Details/5
-        public async Task<IActionResult> Details( short? id ) {
+        //    return View(await activity.AsNoTracking().ToListAsync());
+
+        //}
+
+            // GET: Activities/Details/5
+            public async Task<IActionResult> Details( short? id ) {
             if( id == null ) {
                 return NotFound();
             }

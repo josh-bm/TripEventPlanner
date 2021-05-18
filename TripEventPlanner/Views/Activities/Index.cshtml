@@ -5,20 +5,33 @@
 }
 
 
-
-<h1>Activity</h1>
-
 @using (Html.BeginForm("Index", "Activities", FormMethod.Get))
 {
     <form asp-action="Index" method="get">
-        <div class="form-actions no-color">
-            <p>
-                Find by name: <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
-                <input type="submit" value="Search" class="btn btn-default" /> |
-                <a asp-action="Index">Back to Full List</a>
-            </p>
+        <div class="form">
+
+            <article class="form-container">
+                <div class="form__input-container">
+                    <input placeholder="Insert Activity Name" class="form__input" type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
+                    <div class=" no-color">
+                        <button type="submit" value="" class="form__actions btn btn-default" />
+                    </div>
+
+                </div>
+
+                <select class="form__location" name="location" value="@ViewData["location"]">
+                    <option>All</option>
+                    @foreach (var location in (IEnumerable<Location>)ViewData["locationFilter"])
+                    {
+                        <option>@location.Name</option>
+                    }
+
+                </select>
+
+
+            </article>
         </div>
-        <select name="activityType" value="@ViewData["activityType"]">
+        <select class="form__activity" name="activityType" value="@ViewData["activityType"]">
             <option>All</option>
             @foreach (var type in (IEnumerable<ActivityType>)ViewData["activityTypeFilter"])
             {
@@ -26,89 +39,124 @@
             }
 
         </select>
-        <select name="location" value="@ViewData["location"]">
-            <option>All</option>
-            @foreach (var location in (IEnumerable<Location>)ViewData["locationFilter"])
-            {
-                <option>@location.Name</option>
-            }
-
-        </select>
+        <div class="form-actions no-color">
+            <input type="submit" value="Search" class="btn btn-default" /> |
+            <a asp-action="Index">Rest</a>
+        </div>
+        @foreach (var type in (IEnumerable<ActivityType>)ViewData["activityTypeFilter"])
+        {
+            <button type="submit" class="activity__button btn btn-default">@type.Name</button>
+        }
     </form>
 }
 
+<section class="activity">
 
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Address)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ImageUrl)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StartDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EndDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ActivityType)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Location)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+    @foreach (var item in Model.Select((value, i) => new { i = i + 1, value }))
+    {
+        <article class="activity__item">
+            <img class="activity__img" src="/images/activity/@item.value.ImageUrl" />
+            <div class="activity-info">
+                <h1 class="activity__header">@item.i. @item.value.Name</h1>
+                <span class="activity__address info">
+                    <b>Address:</b> @item.value.Address
+                    @*<b>Location:</b> @item.value.Location.Name*@
+                </span>
+                <span class="activity__desc info">
+                    <b>Description:</b> @item.value.Description
+                </span>
+                @if (item.value.Price != null)
+                {
+                    <span class="activity__price info">
+
+                        <b>Price:</b>  @item.value.Price
+                    </span>
+                }
+                <span class="activity__type info">
+                    <b>Type:</b>  @item.value.ActivityType.Name
+                </span>
+
+            </div>
+            <h3 class="activity__add">add event</h3>
+        </article>
+    }
+
+
+</section>
+
+
+@*<table class="table">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Address)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Price)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ImageUrl)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.StartDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EndDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ActivityType.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Location.Name)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.ActivityId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.ActivityId">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.ActivityId">Delete</a>
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Address)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ImageUrl)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StartDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EndDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ActivityType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Location)
+                </th>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model) {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Address)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ImageUrl)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StartDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EndDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ActivityType.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Location.Name)
+                    </td>
+
+                </tr>
+
+            }
+        </tbody>
+    </table>*@
+@*<td>
+        <a asp-action="Edit" asp-route-id="@item.ActivityId">Edit</a> |
+        <a asp-action="Details" asp-route-id="@item.ActivityId">Details</a> |
+        <a asp-action="Delete" asp-route-id="@item.ActivityId">Delete</a>
+    </td>*@
