@@ -38,6 +38,7 @@
 </section>
 @foreach (var item in Model) {
     @foreach (var location in item.Country.Locations) {
+        
         @foreach (var locationItem in location.Activities) {
             <section class="trip-activities">
                 <section class="trip-activity-imageUrl">
@@ -47,13 +48,13 @@
                 </section>
                 <section class="trip-activity-info">
                     <span class="info-span"><strong> Country: </strong>@item.Country.Name</span>
-                    <span class="info-span"><strong> Activitytype: </strong></span>
-                    <span class="info-span"><strong> Activity Name: </strong>@locationItem.Name</span>
-                    <span class="info-span"><strong> Description: </strong>@locationItem.Description</span>
-                    <span class="info-span"><strong> Adress: </strong>@locationItem.Address</span>
-                    <span class="info-span"><strong> Price: </strong>@locationItem.Price</span>
-                    <span class="info-span"><strong> Date: </strong>@locationItem.StartDate - @locationItem.EndDate</span>
-                </section>
+                    <span class="info-span"><strong> Activitytype: </strong>@Html.DisplayFor(modelItem => locationItem.ActivityType.Name)</span>
+                        <span class="info-span"><strong> Activity Name: </strong>@locationItem.Name</span>
+                        <span class="info-span"><strong> Description: </strong>@locationItem.Description</span>
+                        <span class="info-span"><strong> Adress: </strong>@locationItem.Address</span>
+                        <span class="info-span"><strong> Price: </strong>@locationItem.Price</span>
+                        <span class="info-span"><strong> Date: </strong>@locationItem.StartDate - @locationItem.EndDate</span>
+                    </section>
             </section>
         }
 

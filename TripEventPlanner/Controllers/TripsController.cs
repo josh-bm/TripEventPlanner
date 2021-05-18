@@ -28,7 +28,8 @@ namespace TripEventPlanner.Controllers
             var itravelPlannerDBContext = _context.Trips.Where(t => t.UserId == id)
                .Include(a => a.Country)
                .ThenInclude(c => c.Locations)
-               .ThenInclude(m => m.Activities);
+               .ThenInclude(m => m.Activities)
+                .ThenInclude(a => a.ActivityType);
 
             return View(await itravelPlannerDBContext.ToListAsync());
         }
@@ -41,13 +42,16 @@ namespace TripEventPlanner.Controllers
                .Include(a => a.Country).Where(c => c.CountryId == countryId)
                .Include(c => c.Country)
                .ThenInclude(s => s.Locations)
-               .ThenInclude(m => m.Activities);
+               .ThenInclude(m => m.Activities)
+               .ThenInclude(a => a.ActivityType);
+
 
             return View(await itravelPlannerDBContext.ToListAsync());
         }
 
-        public IActionResult AddActivity(int locationId)
+        public IActionResult AddActivity(string locationName, int locationId)
         {
+            HttpContext.Session.SetString("locationName", locationName);
             HttpContext.Session.SetInt32("locationId", locationId);
             return RedirectToAction("Index", "Activities");
         }

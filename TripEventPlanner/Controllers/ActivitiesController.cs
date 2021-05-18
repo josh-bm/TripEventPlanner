@@ -23,7 +23,7 @@ namespace TripEventPlanner.Controllers {
 
             var activityTypeData = _context.ActivityTypes;
             ViewData["activityTypeFilter"] = activityTypeData;
-            ViewData["activituType"] = activityType;
+            ViewData["activityType"] = activityType;
 
             var locationData = _context.Locations;
             ViewData["locationFilter"] = locationData;
@@ -85,8 +85,6 @@ namespace TripEventPlanner.Controllers {
             }
 
 
-
-
             return View(await activity.AsNoTracking().ToListAsync());
         }
 
@@ -113,13 +111,35 @@ namespace TripEventPlanner.Controllers {
             ViewData["LocationId"] = new SelectList(_context.Locations, "LocationId", "Name");
             return View();
         }
+        [HttpPost]
+        public async Task<IActionResult> Create2(string ActivityTypeId, string Name, string Description, 
+            string Address, string Price, string ImageUrl, string LocationId) {
 
+            if (ModelState.IsValid) {
+                _context.Activities.Add( new Activity {
+                    ActivityTypeId = 1,
+                    Name = Name,
+                    Description = Description,
+                    Address = Address,
+                    Price = Convert.ToInt32(Price),
+                    ImageUrl = ImageUrl,
+                    //StartDate = DateTime.Parse(StartDate),
+                    //EndDate = DateTime.Parse(EndDate) ,
+                    LocationId = Convert.ToInt16(LocationId)
+                });
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View();
+        }
         // POST: Activities/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create( [Bind("ActivityId,Name,Description,Address,Price,ActivityTypeId,ImageUrl,StartDate,EndDate,LocationId")] Activity activity ) {
+        public async Task<IActionResult> Create( 
+            [Bind("ActivityId,Name,Description,Address,Price,ActivityTypeId,ImageUrl,StartDate,EndDate,LocationId")] 
+        Activity activity ) {
             if( ModelState.IsValid ) {
                 _context.Add(activity);
                 await _context.SaveChangesAsync();
