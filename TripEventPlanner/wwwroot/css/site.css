@@ -10,6 +10,10 @@ body {
     font-family: 'KoHo', sans-serif;
 }
 
+    body .container {
+        max-width: 1400px;
+    }
+
 /* Nav ------------------------------------------------------------------------------------ */
 .navbar-nav {
     justify-content: flex-end;
@@ -117,7 +121,7 @@ i {
     .menuTabs section {
         border: 1px solid #cacaca;
         padding: 2.5em;
-        width: 200px;
+        width: 300px;
         display: flex;
         flex-direction: column;
         justify-content: center;
