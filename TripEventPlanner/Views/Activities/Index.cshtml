@@ -51,8 +51,6 @@
 }
 
 <section class="activity">
-
-
     @foreach (var item in Model.Select((value, i) => new { i = i + 1, value }))
     {
         <article class="activity__item">
@@ -60,7 +58,7 @@
             <div class="activity-info">
                 <h1 class="activity__header">@item.i. @item.value.Name</h1>
                 <span class="activity__address info">
-                    <b>Address:</b> @item.value.Address @item.value.Location.Name
+                    <b>Address:</b> @item.value.Address @Html.DisplayFor(modelItem => item.value.Location.Name)
                 </span>
                 <span class="activity__desc info">
                     <b>Description:</b> @item.value.Description
@@ -84,78 +82,3 @@
 
 </section>
 
-
-@*<table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Name)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Description)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Address)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Price)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ImageUrl)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.StartDate)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.EndDate)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ActivityType)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Location)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model) {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Description)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Address)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Price)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ImageUrl)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.StartDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.EndDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ActivityType.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Location.Name)
-                    </td>
-
-                </tr>
-
-            }
-        </tbody>
-    </table>*@
-@*<td>
-        <a asp-action="Edit" asp-route-id="@item.ActivityId">Edit</a> |
-        <a asp-action="Details" asp-route-id="@item.ActivityId">Details</a> |
-        <a asp-action="Delete" asp-route-id="@item.ActivityId">Delete</a>
-    </td>*@
