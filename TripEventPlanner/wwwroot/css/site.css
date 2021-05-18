@@ -273,6 +273,71 @@ a.navbar-brand {
 
 /* My trip page end ------------------------------------------------------------------------------------ */
 
+/* My Trip pag ------------------------------------------------------------------------------------ */
+.my-trip {
+    display: flex;
+}
+
+.trip-location {
+    display: flex !important;
+}
+
+.trip-location-imageUrl {
+    margin-right: 1em;
+    width: 500px
+}
+
+.activity-image {
+    width: 200px;
+    height: 150px;
+}
+
+.info-span {
+    display: block;
+}
+
+figure {
+    position: relative;
+    text-align: center;
+    width: 100%;
+}
+
+    figure img {
+        width: 100%;
+        filter: brightness(50%);
+    }
+
+figcaption {
+    position: absolute;
+    bottom: 8px;
+    right: 16px;
+    color: white;
+    font-size: 2em;
+}
+
+a.navbar-brand {
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
+}
+
+.trip-activities {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.trip-activity-imageUrl {
+    width: 200px;
+    height: 150px;
+    margin-right: 20px;
+}
+
+.trip-activity-info {
+}
+
+
+/* My trip page end ------------------------------------------------------------------------------------ */
+
 
 /* Sticky footer styles
 -------------------------------------------------- */
