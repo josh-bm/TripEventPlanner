@@ -23,6 +23,7 @@ namespace TripEventPlanner.Data
         public virtual DbSet<Country> Countries { get; set; }
         public virtual DbSet<Location> Locations { get; set; }
         public virtual DbSet<Trip> Trips { get; set; }
+        public virtual DbSet<TripActivity> TripActivities { get; set; }
         public virtual DbSet<User> Users { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -175,6 +176,29 @@ namespace TripEventPlanner.Data
                     .WithMany(p => p.Trips)
                     .HasForeignKey(d => d.UserId)
                     .HasConstraintName("FK_Trip_Users");
+            });
+
+            modelBuilder.Entity<TripActivity>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToTable("TripActivity");
+
+                entity.Property(e => e.ActivityId).HasColumnName("activity_id");
+
+                entity.Property(e => e.TripId).HasColumnName("trip_id");
+
+                entity.HasOne(d => d.Activity)
+                    .WithMany()
+                    .HasForeignKey(d => d.ActivityId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_TripActivity_Activity");
+
+                entity.HasOne(d => d.Trip)
+                    .WithMany()
+                    .HasForeignKey(d => d.TripId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_TripActivity_Trip");
             });
 
             modelBuilder.Entity<User>(entity =>
