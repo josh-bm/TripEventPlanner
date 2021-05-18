@@ -9,7 +9,7 @@
 </section>
 
 <p>
-    <a asp-action="Create">Create New Trip</a>
+    <a asp-action="Create">Create Trip</a>
 </p>
 
 <section class="my-trip">
@@ -25,12 +25,12 @@
             </section>
         </section>
     }
-    <p>
-        <a asp-action="Create">Create Trip</a>
-    </p>
 </section>
 <section>
     <h3>My Activities</h3>
+    <p>
+        <a asp-action="AddActivity">Add Activity</a>
+    </p>
 </section>
 @foreach (var item in Model)
 {
@@ -58,7 +58,5 @@
 
     }
 }
-<p>
-    <a asp-action="AddActivity">Add Activity</a>
-</p>
+
 
