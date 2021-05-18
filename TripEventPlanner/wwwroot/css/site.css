@@ -186,13 +186,45 @@ button:focus {
 }
 
 .flex {
+=======
+/* Provide sufficient contrast against white background */
+a {
+    color: #0366d6;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
+
+/* My Trip pag ------------------------------------------------------------------------------------ */
+.my-trip {
+    display: flex;
+}
+.trip-location {
+>>>>>>> bauBranch
     display: flex !important;
 }
 
+.trip-location-imageUrl {
     margin-right: 1em;
     width: 500px
 }
+.activity-image {
+    width: 200px;
+    height: 150px;
+}
 
+.info-span {
+    display: block;
+}
 figure {
     position: relative;
     text-align: center;
@@ -218,22 +250,23 @@ a.navbar-brand {
     word-break: break-all;
 }
 
-/* Provide sufficient contrast against white background */
-a {
-    color: #0366d6;
+.trip-activities {
+    display: flex;
+    margin-bottom: 20px;
 }
 
-.btn-primary {
-    color: #fff;
-    background-color: #1b6ec2;
-    border-color: #1861ac;
+.trip-activity-imageUrl {
+    width: 200px;
+    height: 150px;
+    margin-right: 20px;
+}
+.trip-activity-info {
+
 }
 
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-    color: #fff;
-    background-color: #1b6ec2;
-    border-color: #1861ac;
-}
+
+/* My trip page end ------------------------------------------------------------------------------------ */
+
 
 /* Sticky footer styles
 -------------------------------------------------- */
