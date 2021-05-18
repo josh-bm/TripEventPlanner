@@ -28,6 +28,18 @@
 
                 </select>
 
+<section class="flex">
+    @foreach (var item in Model)
+    {
+        if (item.StartDate < DateTime.Now || item.EndDate > DateTime.Now)
+        {
+            <section class="flex-wrapper">
+                <figure>
+                    <img src="/images/activity/f1racing.jpg" alt="Alternate Text" class="" />
+                    <figcaption>@Html.DisplayFor(modelItem => item.Name)</figcaption>
+                </figure>
+                <p> @Html.DisplayFor(modelItem => item.StartDate) - @Html.DisplayFor(modelItem => item.EndDate)</p>
+            </section>
 
             </article>
         </div>
