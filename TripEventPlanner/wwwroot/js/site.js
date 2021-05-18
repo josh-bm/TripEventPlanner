@@ -3,7 +3,7 @@
 
 // Write your JavaScript code.
 
-const type = document.querySelectorAll(".activity");
+const type = document.querySelectorAll(".activity__button");
 const activity = document.querySelectorAll(".form__activity");
 
 type.forEach(button => {

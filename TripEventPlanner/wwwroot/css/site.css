@@ -116,6 +116,7 @@ for details on configuring this project to bundle and minify static web assets. 
     border: none;
     padding: 10px;
     background: rgba(86, 204, 242, 0.38);
+    border-radius: 10px;
 }
 
 .form__actions {
@@ -141,24 +142,37 @@ for details on configuring this project to bundle and minify static web assets. 
     font-weight: bold;
 }
 
-.activity{
-
+.activity {
+    display: grid;
+    grid-template-rows: 150px;
+    gap: 10px;
 }
 .activity__item {
-
-}
-.activity__item::marker {
-    position:absolute;
-    top: 0;
-    right: 0;
-
+    display: grid;
+    grid-template-columns: 200px auto 100px;
+    grid-template-rows: auto;
 }
 
 .activity__img {
-    width: 150px;
+    width: 200px;
     height: 150px;
 }
+.activity__header {
+    font-size: 24px;
+    font-weight: bold;
+}
+.activity-info{
+    margin-left: 10px;
+}
 
+.info{
+    display:block;
+}
+.activity__add {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 /* activity page end ------------------------------------------------------------------------------------ */
 

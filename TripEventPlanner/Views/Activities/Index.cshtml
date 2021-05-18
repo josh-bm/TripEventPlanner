@@ -28,7 +28,7 @@
 
             </article>
         </div>
-        <select  class="form__activity" name="activityType" value="@ViewData["activityType"]">
+        <select class="form__activity" name="activityType" value="@ViewData["activityType"]">
             <option>All</option>
             @foreach (var type in (IEnumerable<ActivityType>)ViewData["activityTypeFilter"]) {
                 <option>@type.Name</option>
@@ -46,37 +46,39 @@
 }
 
 <section class="activity">
-    <div class="activity-container">
-           
-        @foreach (var item in Model.Select((value, i) => new { i, value })) {
+
+
+    @foreach (var item in Model.Select((value, i) => new { i = i + 1, value })) {
         <article class="activity__item">
-            <h1 class="activity__header">@item.i @item.value.Name</h1>
             <img class="activity__img" src="/images/activity/@item.value.ImageUrl" />
-            <span class="activity__desc">
-                @item.value.Description
-            </span>
-            <span class="activity__address">
-                @item.value.Address @item.value.Location
-            </span>
-            <span class="activity__price">
-                @item.value.Price
-            </span>
-            <span class="activity__type">
-                @item.value.ActivityType.Name
-            </span>
-            @*<span class="activity__address">
-                @item.value.Address
-            </span>*@
+            <div class="activity-info">
+                <h1 class="activity__header">@item.i. @item.value.Name</h1>
+                <span class="activity__address info">
+                    <b>Address:</b> @item.value.Address @item.value.Location
+                </span>
+                <span class="activity__desc info">
+                    <b>Description:</b> @item.value.Description
+                </span>
+                @if (item.value.Price != null) {
+                    <span class="activity__price info">
 
+                        <b>Price:</b>  @item.value.Price
+                    </span>
+                }
+                <span class="activity__type info">
+                    <b>Type:</b>  @item.value.ActivityType.Name
+                </span>
 
+            </div>
+            <h3 class="activity__add">add event</h3>
         </article>
-        }
-    </div>
+    }
+
 
 </section>
 
 
-<table class="table">
+@*<table class="table">
     <thead>
         <tr>
             <th>
@@ -111,7 +113,6 @@
     </thead>
     <tbody>
         @foreach (var item in Model) {
-            @*@if (item.ActivityType.Name == ViewData["hej"].ToString()) {*@
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.Name)
@@ -140,14 +141,14 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Location.Name)
                 </td>
-                @*<td>
-                        <a asp-action="Edit" asp-route-id="@item.ActivityId">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.ActivityId">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.ActivityId">Delete</a>
-                    </td>*@
+
             </tr>
-            @* }  *@
 
         }
     </tbody>
-</table>
+</table>*@
+@*<td>
+        <a asp-action="Edit" asp-route-id="@item.ActivityId">Edit</a> |
+        <a asp-action="Details" asp-route-id="@item.ActivityId">Details</a> |
+        <a asp-action="Delete" asp-route-id="@item.ActivityId">Delete</a>
+    </td>*@
