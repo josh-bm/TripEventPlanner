@@ -439,11 +439,6 @@ C:\Users\Joshua\Documents\GitHub\TripEventPlanner\TripEventPlanner\obj\Debug\net
 C:\Users\Joshua\Documents\GitHub\TripEventPlanner\TripEventPlanner\obj\Debug\net5.0\Razor\Views\Activities\Details.cshtml.g.cs
 C:\Users\Joshua\Documents\GitHub\TripEventPlanner\TripEventPlanner\obj\Debug\net5.0\Razor\Views\Activities\Edit.cshtml.g.cs
 C:\Users\Joshua\Documents\GitHub\TripEventPlanner\TripEventPlanner\obj\Debug\net5.0\Razor\Views\Activities\Index.cshtml.g.cs
-C:\Users\Joshua\Documents\GitHub\TripEventPlanner\TripEventPlanner\obj\Debug\net5.0\Razor\Views\ActivityTypes\Create.cshtml.g.cs
-C:\Users\Joshua\Documents\GitHub\TripEventPlanner\TripEventPlanner\obj\Debug\net5.0\Razor\Views\ActivityTypes\Delete.cshtml.g.cs
-C:\Users\Joshua\Documents\GitHub\TripEventPlanner\TripEventPlanner\obj\Debug\net5.0\Razor\Views\ActivityTypes\Details.cshtml.g.cs
-C:\Users\Joshua\Documents\GitHub\TripEventPlanner\TripEventPlanner\obj\Debug\net5.0\Razor\Views\ActivityTypes\Edit.cshtml.g.cs
-C:\Users\Joshua\Documents\GitHub\TripEventPlanner\TripEventPlanner\obj\Debug\net5.0\Razor\Views\ActivityTypes\Index.cshtml.g.cs
 C:\Users\Joshua\Documents\GitHub\TripEventPlanner\TripEventPlanner\obj\Debug\net5.0\Razor\Views\Home\Index.cshtml.g.cs
 C:\Users\Joshua\Documents\GitHub\TripEventPlanner\TripEventPlanner\obj\Debug\net5.0\Razor\Views\Home\Privacy.cshtml.g.cs
 C:\Users\Joshua\Documents\GitHub\TripEventPlanner\TripEventPlanner\obj\Debug\net5.0\Razor\Views\Shared\_Layout.cshtml.g.cs
