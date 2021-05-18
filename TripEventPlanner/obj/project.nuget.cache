@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "yYXZCRTlw0GXZtnqa8SM0Lp8ortFyO9cezfVdSOj8tK1z31knmyHGg0P66UO5hhokpZJtHQOwgW/SRTXyQ/zKg==",
+  "dgSpecHash": "T++GQ3laeFoEjBNu4wqMVhASirl1pPDN+6hxdycvcXSgUU1aVbHft9+kdDjm164roPZcGq6pG4Ddzc+Kz/LMig==",
   "success": true,
   "projectFilePath": "E:\\School Folder\\PBA Webdevelopment\\Semester1\\Backendprogrammering\\src\\TripEventPlanner\\TripEventPlanner\\TripEventPlanner\\TripEventPlanner.csproj",
   "expectedPackageFiles": [
@@ -25,8 +25,8 @@
     "C:\\Users\\Baruani Lukanda\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\5.0.6\\microsoft.entityframeworkcore.analyzers.5.0.6.nupkg.sha512",
     "C:\\Users\\Baruani Lukanda\\.nuget\\packages\\microsoft.entityframeworkcore.design\\5.0.6\\microsoft.entityframeworkcore.design.5.0.6.nupkg.sha512",
     "C:\\Users\\Baruani Lukanda\\.nuget\\packages\\microsoft.entityframeworkcore.relational\\5.0.6\\microsoft.entityframeworkcore.relational.5.0.6.nupkg.sha512",
-    "C:\\Users\\Baruani Lukanda\\.nuget\\packages\\microsoft.entityframeworkcore.sqlserver\\5.0.4\\microsoft.entityframeworkcore.sqlserver.5.0.4.nupkg.sha512",
-    "C:\\Users\\Baruani Lukanda\\.nuget\\packages\\microsoft.entityframeworkcore.tools\\5.0.4\\microsoft.entityframeworkcore.tools.5.0.4.nupkg.sha512",
+    "C:\\Users\\Baruani Lukanda\\.nuget\\packages\\microsoft.entityframeworkcore.sqlserver\\5.0.6\\microsoft.entityframeworkcore.sqlserver.5.0.6.nupkg.sha512",
+    "C:\\Users\\Baruani Lukanda\\.nuget\\packages\\microsoft.entityframeworkcore.tools\\5.0.6\\microsoft.entityframeworkcore.tools.5.0.6.nupkg.sha512",
     "C:\\Users\\Baruani Lukanda\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\5.0.0\\microsoft.extensions.caching.abstractions.5.0.0.nupkg.sha512",
     "C:\\Users\\Baruani Lukanda\\.nuget\\packages\\microsoft.extensions.caching.memory\\5.0.0\\microsoft.extensions.caching.memory.5.0.0.nupkg.sha512",
     "C:\\Users\\Baruani Lukanda\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\5.0.0\\microsoft.extensions.configuration.abstractions.5.0.0.nupkg.sha512",
@@ -137,5 +137,12 @@
     "C:\\Users\\Baruani Lukanda\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
     "C:\\Users\\Baruani Lukanda\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problem reading the cache file E:\\School Folder\\PBA Webdevelopment\\Semester1\\Backendprogrammering\\src\\TripEventPlanner\\TripEventPlanner\\TripEventPlanner\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+    }
+  ]
 }
