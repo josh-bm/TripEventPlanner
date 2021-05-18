@@ -1,11 +1,11 @@
 ﻿@model IEnumerable<TripEventPlanner.Models.Trip>
-
 @{
     ViewData["Title"] = "Index";
 }
 
 <section>
     <h1>My Trips</h1>
+    Age: @Context.Session.GetInt32("id")
 </section>
 
 <p>
@@ -13,8 +13,7 @@
 </p>
 
 <section class="my-trip">
-    @foreach (var item in Model)
-    {
+    @foreach (var item in Model) {
         <section class="trip-location">
             <section class="trip-location-imageUrl">
                 <figure>
@@ -32,12 +31,9 @@
         <a asp-action="AddActivity">Add Activity</a>
     </p>
 </section>
-@foreach (var item in Model)
-{
-    @foreach (var location in item.Country.Locations)
-    {
-        @foreach (var locationItem in location.Activities)
-        {
+@foreach (var item in Model) {
+    @foreach (var location in item.Country.Locations) {
+        @foreach (var locationItem in location.Activities) {
             <section class="trip-activities">
                 <section class="trip-activity-imageUrl">
                     <figure>

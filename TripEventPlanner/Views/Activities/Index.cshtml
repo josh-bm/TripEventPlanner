@@ -4,9 +4,10 @@
     ViewData["Title"] = "Index";
 }
 
+ Age: @Context.Session.GetInt32("id")
 
-@using (Html.BeginForm("Index", "Activities", FormMethod.Get))
-{
+
+@using (Html.BeginForm("Index", "Activities", FormMethod.Get)) {
     <form asp-action="Index" method="get">
         <div class="form">
 
@@ -21,8 +22,7 @@
 
                 <select class="form__location" name="location" value="@ViewData["location"]">
                     <option>All</option>
-                    @foreach (var location in (IEnumerable<Location>)ViewData["locationFilter"])
-                    {
+                    @foreach (var location in (IEnumerable<Location>)ViewData["locationFilter"]) {
                         <option>@location.Name</option>
                     }
 
@@ -33,8 +33,7 @@
         </div>
         <select class="form__activity" name="activityType" value="@ViewData["activityType"]">
             <option>All</option>
-            @foreach (var type in (IEnumerable<ActivityType>)ViewData["activityTypeFilter"])
-            {
+            @foreach (var type in (IEnumerable<ActivityType>)ViewData["activityTypeFilter"]) {
                 <option>@type.Name</option>
             }
 
@@ -43,16 +42,14 @@
             <input type="submit" value="Search" class="btn btn-default" /> |
             <a asp-action="Index">Rest</a>
         </div>
-        @foreach (var type in (IEnumerable<ActivityType>)ViewData["activityTypeFilter"])
-        {
+        @foreach (var type in (IEnumerable<ActivityType>)ViewData["activityTypeFilter"]) {
             <button type="submit" class="activity__button btn btn-default">@type.Name</button>
         }
     </form>
 }
 
 <section class="activity">
-    @foreach (var item in Model.Select((value, i) => new { i = i + 1, value }))
-    {
+    @foreach (var item in Model.Select((value, i) => new { i = i + 1, value })) {
         <article class="activity__item">
             <img class="activity__img" src="/images/activity/@item.value.ImageUrl" />
             <div class="activity-info">
@@ -63,8 +60,7 @@
                 <span class="activity__desc info">
                     <b>Description:</b> @item.value.Description
                 </span>
-                @if (item.value.Price != null)
-                {
+                @if (item.value.Price != null) {
                     <span class="activity__price info">
 
                         <b>Price:</b>  @item.value.Price
