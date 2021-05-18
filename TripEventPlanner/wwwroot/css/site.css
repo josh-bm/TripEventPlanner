@@ -68,7 +68,6 @@ for details on configuring this project to bundle and minify static web assets. 
 /* Home page end ------------------------------------------------------------------------------------ */
 
 
-<<<<<<< HEAD
 /* activity page ------------------------------------------------------------------------------------ */
 
 .form {
@@ -192,11 +191,11 @@ button:focus {
 }
 
 .flex {
-=======
-/* Provide sufficient contrast against white background */
-a {
-    color: #0366d6;
+    display: flex;
 }
+
+/*    color: #0366d6;
+}*/
 
 .btn-primary {
     color: #fff;
@@ -214,8 +213,8 @@ a {
 .my-trip {
     display: flex;
 }
+
 .trip-location {
->>>>>>> bauBranch
     display: flex !important;
 }
 
@@ -223,6 +222,7 @@ a {
     margin-right: 1em;
     width: 500px
 }
+
 .activity-image {
     width: 200px;
     height: 150px;
@@ -231,6 +231,7 @@ a {
 .info-span {
     display: block;
 }
+
 figure {
     position: relative;
     text-align: center;
@@ -266,8 +267,8 @@ a.navbar-brand {
     height: 150px;
     margin-right: 20px;
 }
-.trip-activity-info {
 
+.trip-activity-info {
 }
 
 
