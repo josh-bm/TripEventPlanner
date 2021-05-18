@@ -1,17 +1,48 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
 
+body {
+    font-family: 'KoHo', sans-serif;
+}
+
+/* Nav ------------------------------------------------------------------------------------ */
+.navbar-nav {
+    justify-content: flex-end;
+}
+
+.nav-item {
+    align-items: center;
+    margin-left: 1em;
+    padding: 5px;
+    font-size: 1.1em;
+}
+
+    .nav-item:hover {
+        background-color: #F2F2F2;
+        border-radius: 25px;
+    }
+
+i {
+    font-size: 1.6em;
+}
 
 /* Home page ------------------------------------------------------------------------------------ */
 
 .search {
     width: 100%;
     position: relative;
+    margin-bottom: 2em;
 }
 
 .search__background-img {
     width: 100%;
-    height: 350px;
+    height: 325px;
+    object-fit: cover;
 }
 
 .search__input {
@@ -20,33 +51,36 @@ for details on configuring this project to bundle and minify static web assets. 
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 20px;
-    opacity: 0.8;
-    height: 35px;
-    width: 120px;
+    opacity: 0.9;
+    height: 75px;
+    width: 500px;
     border: none;
     padding: 15px;
     transition: all 0.5s;
+    font-size: 1.5em;
 }
 
     .search__input::placeholder {
         color: black;
         display: flex;
-        text-align: center;
+        text-align: left;
     }
 
     .search__input:focus {
-        width: 225px;
+        width: 600px;
         transition: all 1s;
     }
 
 .create-trip {
     width: 100%;
     position: relative;
+    margin-bottom: 2em;
 }
 
 .create-trip__background-img {
     width: 100%;
-    height: 350px;
+    height: 325px;
+    object-fit: cover;
     border-radius: 2px;
 }
 
@@ -55,16 +89,48 @@ for details on configuring this project to bundle and minify static web assets. 
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    font-size: 1.5em;
 }
 
 .create-trip__input {
     background: white;
     border: none;
     border-radius: 20px;
-    opacity: 0.8;
-    height: 35px;
-    width: 120px;
+    height: 75px;
+    width: 200px;
+    opacity: 0.9;
 }
+
+    .create-trip__input:hover {
+        border: solid 2px #747474;
+    }
+
+.menuTabs {
+    justify-content: space-between;
+}
+
+    .menuTabs a {
+        text-decoration: none;
+        color: black;
+    }
+
+    .menuTabs section {
+        border: 1px solid #cacaca;
+        padding: 2.5em;
+        width: 200px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+        .menuTabs section:hover {
+            background-color: #F2F2F2;
+        }
+
+    .menuTabs h2 {
+        font-size: 1.5em;
+    }
 /* Home page end ------------------------------------------------------------------------------------ */
 .flex {
     display: flex !important;
@@ -155,7 +221,6 @@ html {
 
 body {
     /* Margin bottom by footer height */
-    margin-bottom: 60px;
 }
 
 .footer {
