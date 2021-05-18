@@ -4,77 +4,79 @@
     ViewData["Title"] = "Index";
 }
 
- Age: @Context.Session.GetInt32("id")
+UserId: @Context.Session.GetInt32("id")
+    CountryId: @Context.Session.GetInt32("countryId")
+    locationId: @Context.Session.GetInt32("locationId")
 
 
-@using (Html.BeginForm("Index", "Activities", FormMethod.Get)) {
-    <form asp-action="Index" method="get">
-        <div class="form">
+    @using (Html.BeginForm("Index", "Activities", FormMethod.Get)) {
+        <form asp-action="Index" method="get">
+            <div class="form">
 
-            <article class="form-container">
-                <div class="form__input-container">
-                    <input placeholder="Insert Activity Name" class="form__input" type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
-                    <div class=" no-color">
-                        <button type="submit" value="" class="form__actions btn btn-default" />
+                <article class="form-container">
+                    <div class="form__input-container">
+                        <input placeholder="Insert Activity Name" class="form__input" type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
+                        <div class=" no-color">
+                            <button type="submit" value="" class="form__actions btn btn-default" />
+                        </div>
+
                     </div>
 
-                </div>
+                    <select class="form__location" name="location" value="@ViewData["location"]">
+                        <option>All</option>
+                        @foreach (var location in (IEnumerable<Location>)ViewData["locationFilter"]) {
+                            <option>@location.Name</option>
+                        }
 
-                <select class="form__location" name="location" value="@ViewData["location"]">
-                    <option>All</option>
-                    @foreach (var location in (IEnumerable<Location>)ViewData["locationFilter"]) {
-                        <option>@location.Name</option>
-                    }
-
-                </select>
+                    </select>
 
 
-            </article>
-        </div>
-        <select class="form__activity" name="activityType" value="@ViewData["activityType"]">
-            <option>All</option>
-            @foreach (var type in (IEnumerable<ActivityType>)ViewData["activityTypeFilter"]) {
-                <option>@type.Name</option>
-            }
-
-        </select>
-        <div class="form-actions no-color">
-            <input type="submit" value="Search" class="btn btn-default" /> |
-            <a asp-action="Index">Rest</a>
-        </div>
-        @foreach (var type in (IEnumerable<ActivityType>)ViewData["activityTypeFilter"]) {
-            <button type="submit" class="activity__button btn btn-default">@type.Name</button>
-        }
-    </form>
-}
-
-<section class="activity">
-    @foreach (var item in Model.Select((value, i) => new { i = i + 1, value })) {
-        <article class="activity__item">
-            <img class="activity__img" src="/images/activity/@item.value.ImageUrl" />
-            <div class="activity-info">
-                <h1 class="activity__header">@item.i. @item.value.Name</h1>
-                <span class="activity__address info">
-                    <b>Address:</b> @item.value.Address @Html.DisplayFor(modelItem => item.value.Location.Name)
-                </span>
-                <span class="activity__desc info">
-                    <b>Description:</b> @item.value.Description
-                </span>
-                @if (item.value.Price != null) {
-                    <span class="activity__price info">
-
-                        <b>Price:</b>  @item.value.Price
-                    </span>
-                }
-                <span class="activity__type info">
-                    <b>Type:</b>  @item.value.ActivityType.Name
-                </span>
-
+                </article>
             </div>
-            <h3 class="activity__add">add event</h3>
-        </article>
+            <select class="form__activity" name="activityType" value="@ViewData["activityType"]">
+                <option>All</option>
+                @foreach (var type in (IEnumerable<ActivityType>)ViewData["activityTypeFilter"]) {
+                    <option>@type.Name</option>
+                }
+
+            </select>
+            <div class="form-actions no-color">
+                <input type="submit" value="Search" class="btn btn-default" /> |
+                <a asp-action="Index">Rest</a>
+            </div>
+            @foreach (var type in (IEnumerable<ActivityType>)ViewData["activityTypeFilter"]) {
+                <button type="submit" class="activity__button btn btn-default">@type.Name</button>
+            }
+        </form>
     }
 
+    <section class="activity">
+        @foreach (var item in Model.Select((value, i) => new { i = i + 1, value })) {
+            <article class="activity__item">
+                <img class="activity__img" src="/images/activity/@item.value.ImageUrl" />
+                <div class="activity-info">
+                    <h1 class="activity__header">@item.i. @item.value.Name</h1>
+                    <span class="activity__address info">
+                        <b>Address:</b> @item.value.Address @Html.DisplayFor(modelItem => item.value.Location.Name)
+                    </span>
+                    <span class="activity__desc info">
+                        <b>Description:</b> @item.value.Description
+                    </span>
+                    @if (item.value.Price != null) {
+                        <span class="activity__price info">
 
-</section>
+                            <b>Price:</b>  @item.value.Price
+                        </span>
+                    }
+                    <span class="activity__type info">
+                        <b>Type:</b>  @item.value.ActivityType.Name
+                    </span>
+
+                </div>
+                <h3 class="activity__add">add event</h3>
+            </article>
+        }
+
+
+    </section>
 

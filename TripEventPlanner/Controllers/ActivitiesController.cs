@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TripEventPlanner.Data;
 using TripEventPlanner.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace TripEventPlanner.Controllers {
     public class ActivitiesController : Controller {
@@ -16,7 +17,7 @@ namespace TripEventPlanner.Controllers {
             _context = context;
         }
 
-        public async Task<IActionResult> Index( string searchString, string activityType, string location, string mad) {
+        public async Task<IActionResult> Index( string searchString, string activityType, string location) {
 
             ViewData["CurrentFilter"] = searchString;
 
@@ -88,11 +89,6 @@ namespace TripEventPlanner.Controllers {
 
             return View(await activity.AsNoTracking().ToListAsync());
         }
-        //public async Task<IActionResult> hej(string type) {
-
-        //    return View(await activity.AsNoTracking().ToListAsync());
-
-        //}
 
             // GET: Activities/Details/5
             public async Task<IActionResult> Details( short? id ) {

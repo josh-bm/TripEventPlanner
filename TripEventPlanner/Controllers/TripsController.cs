@@ -8,7 +8,6 @@ using Microsoft.EntityFrameworkCore;
 using TripEventPlanner.Data;
 using TripEventPlanner.Models;
 using Microsoft.AspNetCore.Http;
-using TripEventPlanner.Helpers;
 
 namespace TripEventPlanner.Controllers
 {
@@ -24,29 +23,32 @@ namespace TripEventPlanner.Controllers
         // GET: Trips
         public async Task<IActionResult> Index(int id)
         {
-            //HttpContext.Session.GetInt32
             HttpContext.Session.SetInt32("id", id);
 
-            //var itravelPlannerDBContext = _context.Trips.Include(t => t.Country).Include(t => t.User);
             var itravelPlannerDBContext = _context.Trips.Where(t => t.UserId == id)
                .Include(a => a.Country)
                .ThenInclude(c => c.Locations)
                .ThenInclude(m => m.Activities);
 
-            //var mad = from t in _context.Trips.Where(t => t.UserId == id) select t;
-            //mad.ToArray()
-            //JavaScriptSerializer serializer = new JavaScriptSerializer();
-            //string json = serializer.Serialize(sb);
-            var hej = _context.Trips.Where(t => t.UserId == id)
-            .Include(a => a.Country);
+            return View(await itravelPlannerDBContext.ToListAsync());
+        }
 
-            //SessionHelper.SetObjectAsJson(HttpContext.Session, "trip", hej);
+        public async Task<IActionResult> SelectedTrip(int countryId) {
+            var id = HttpContext.Session.GetInt32("id");
+            HttpContext.Session.SetInt32("countryId", countryId);
+
+            var itravelPlannerDBContext = _context.Trips.Where(t => t.UserId == id)
+               .Include(a => a.Country).Where(c => c.CountryId == countryId)
+               .Include(c => c.Country)
+               .ThenInclude(s => s.Locations)
+               .ThenInclude(m => m.Activities);
 
             return View(await itravelPlannerDBContext.ToListAsync());
         }
 
-        public IActionResult AddActivity()
+        public IActionResult AddActivity(int locationId)
         {
+            HttpContext.Session.SetInt32("locationId", locationId);
             return RedirectToAction("Index", "Activities");
         }
 
@@ -73,8 +75,6 @@ namespace TripEventPlanner.Controllers
         // GET: Trips/Create
         public IActionResult Create()
         {
-            
-
             ViewData["CountryId"] = new SelectList(_context.Countries, "CountryId", "Name");
             ViewData["UserId"] = new SelectList(_context.Users, "UserId" , "Email");
             return View();

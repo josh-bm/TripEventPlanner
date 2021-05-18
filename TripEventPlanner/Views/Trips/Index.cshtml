@@ -12,24 +12,29 @@
     <a asp-action="Create">Create Trip</a>
 </p>
 
+
 <section class="my-trip">
     @foreach (var item in Model) {
         <section class="trip-location">
+        <a asp-controller="trips" asp-action="SelectedTrip"  asp-route-countryId="@item.CountryId">
+           
             <section class="trip-location-imageUrl">
+
                 <figure>
                     <img src="@Html.DisplayFor(modelItem => item.Country.ImageUrl)" alt="Alternate Text" class="" />
                     <figcaption>@Html.DisplayFor(modelItem => item.Name)</figcaption>
                 </figure>
                 <p> @Html.DisplayFor(modelItem => item.StartDate) - @Html.DisplayFor(modelItem => item.EndDate)</p>
             </section>
+        </a>
         </section>
     }
 </section>
 <section>
     <h3>My Activities</h3>
-    <p>
+    @*<p>
         <a asp-action="AddActivity">Add Activity</a>
-    </p>
+    </p>*@
 </section>
 @foreach (var item in Model) {
     @foreach (var location in item.Country.Locations) {
