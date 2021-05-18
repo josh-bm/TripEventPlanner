@@ -477,14 +477,6 @@ E:\School Folder\PBA Webdevelopment\Semester1\Backendprogrammering\src\TripEvent
 E:\School Folder\PBA Webdevelopment\Semester1\Backendprogrammering\src\TripEventPlanner\TripEventPlanner\TripEventPlanner\obj\Debug\net5.0\Razor\Views\Users\Details.cshtml.g.cs
 E:\School Folder\PBA Webdevelopment\Semester1\Backendprogrammering\src\TripEventPlanner\TripEventPlanner\TripEventPlanner\obj\Debug\net5.0\Razor\Views\Users\Edit.cshtml.g.cs
 E:\School Folder\PBA Webdevelopment\Semester1\Backendprogrammering\src\TripEventPlanner\TripEventPlanner\TripEventPlanner\obj\Debug\net5.0\Razor\Views\Users\Index.cshtml.g.cs
-<<<<<<< HEAD
-=======
-E:\School Folder\PBA Webdevelopment\Semester1\Backendprogrammering\src\TripEventPlanner\TripEventPlanner\TripEventPlanner\obj\Debug\net5.0\Razor\Views\Trips\Create.cshtml.g.cs
-E:\School Folder\PBA Webdevelopment\Semester1\Backendprogrammering\src\TripEventPlanner\TripEventPlanner\TripEventPlanner\obj\Debug\net5.0\Razor\Views\Trips\Delete.cshtml.g.cs
-E:\School Folder\PBA Webdevelopment\Semester1\Backendprogrammering\src\TripEventPlanner\TripEventPlanner\TripEventPlanner\obj\Debug\net5.0\Razor\Views\Trips\Details.cshtml.g.cs
-E:\School Folder\PBA Webdevelopment\Semester1\Backendprogrammering\src\TripEventPlanner\TripEventPlanner\TripEventPlanner\obj\Debug\net5.0\Razor\Views\Trips\Edit.cshtml.g.cs
-E:\School Folder\PBA Webdevelopment\Semester1\Backendprogrammering\src\TripEventPlanner\TripEventPlanner\TripEventPlanner\obj\Debug\net5.0\Razor\Views\Trips\Index.cshtml.g.cs
->>>>>>> joshuatest
 E:\School Folder\PBA Webdevelopment\Semester1\Backendprogrammering\src\TripEventPlanner\TripEventPlanner\TripEventPlanner\obj\Debug\net5.0\Razor\Views\Activities\Create.cshtml.g.cs
 E:\School Folder\PBA Webdevelopment\Semester1\Backendprogrammering\src\TripEventPlanner\TripEventPlanner\TripEventPlanner\obj\Debug\net5.0\Razor\Views\Activities\Delete.cshtml.g.cs
 E:\School Folder\PBA Webdevelopment\Semester1\Backendprogrammering\src\TripEventPlanner\TripEventPlanner\TripEventPlanner\obj\Debug\net5.0\Razor\Views\Activities\Details.cshtml.g.cs

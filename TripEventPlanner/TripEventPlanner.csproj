@@ -24,4 +24,9 @@
     <Folder Include="Models\ViewModels\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\images\icons\Search_Icon.svg" />
+    <None Include="wwwroot\images\searchHome2.svg" />
+  </ItemGroup>
+
 </Project>
