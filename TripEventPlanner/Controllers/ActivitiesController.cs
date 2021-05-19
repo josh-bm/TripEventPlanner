@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TripEventPlanner.Data;
 using TripEventPlanner.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace TripEventPlanner.Controllers {
     public class ActivitiesController : Controller {
@@ -16,13 +17,13 @@ namespace TripEventPlanner.Controllers {
             _context = context;
         }
 
-        public async Task<IActionResult> Index( string searchString, string activityType, string location, string mad) {
+        public async Task<IActionResult> Index( string searchString, string activityType, string location) {
 
             ViewData["CurrentFilter"] = searchString;
 
             var activityTypeData = _context.ActivityTypes;
             ViewData["activityTypeFilter"] = activityTypeData;
-            ViewData["activituType"] = activityType;
+            ViewData["activityType"] = activityType;
 
             var locationData = _context.Locations;
             ViewData["locationFilter"] = locationData;
@@ -84,15 +85,8 @@ namespace TripEventPlanner.Controllers {
             }
 
 
-
-
             return View(await activity.AsNoTracking().ToListAsync());
         }
-        //public async Task<IActionResult> hej(string type) {
-
-        //    return View(await activity.AsNoTracking().ToListAsync());
-
-        //}
 
             // GET: Activities/Details/5
             public async Task<IActionResult> Details( short? id ) {
@@ -117,13 +111,35 @@ namespace TripEventPlanner.Controllers {
             ViewData["LocationId"] = new SelectList(_context.Locations, "LocationId", "Name");
             return View();
         }
+        [HttpPost]
+        public async Task<IActionResult> Create2(string ActivityTypeId, string Name, string Description, 
+            string Address, string Price, string ImageUrl, string LocationId) {
 
+            if (ModelState.IsValid) {
+                _context.Activities.Add( new Activity {
+                    ActivityTypeId = 1,
+                    Name = Name,
+                    Description = Description,
+                    Address = Address,
+                    Price = Convert.ToInt32(Price),
+                    ImageUrl = ImageUrl,
+                    //StartDate = DateTime.Parse(StartDate),
+                    //EndDate = DateTime.Parse(EndDate) ,
+                    LocationId = Convert.ToInt16(LocationId)
+                });
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View();
+        }
         // POST: Activities/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create( [Bind("ActivityId,Name,Description,Address,Price,ActivityTypeId,ImageUrl,StartDate,EndDate,LocationId")] Activity activity ) {
+        public async Task<IActionResult> Create( 
+            [Bind("ActivityId,Name,Description,Address,Price,ActivityTypeId,ImageUrl,StartDate,EndDate,LocationId")] 
+        Activity activity ) {
             if( ModelState.IsValid ) {
                 _context.Add(activity);
                 await _context.SaveChangesAsync();

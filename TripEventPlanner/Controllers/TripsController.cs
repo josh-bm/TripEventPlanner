@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TripEventPlanner.Data;
 using TripEventPlanner.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace TripEventPlanner.Controllers
 {
@@ -22,16 +23,36 @@ namespace TripEventPlanner.Controllers
         // GET: Trips
         public async Task<IActionResult> Index(int id)
         {
-            //var itravelPlannerDBContext = _context.Trips.Include(t => t.Country).Include(t => t.User);
+            HttpContext.Session.SetInt32("id", id);
+
             var itravelPlannerDBContext = _context.Trips.Where(t => t.UserId == id)
                .Include(a => a.Country)
                .ThenInclude(c => c.Locations)
-               .ThenInclude(m => m.Activities);
+               .ThenInclude(m => m.Activities)
+                .ThenInclude(a => a.ActivityType);
+
             return View(await itravelPlannerDBContext.ToListAsync());
         }
 
-        public IActionResult AddActivity()
+        public async Task<IActionResult> SelectedTrip(int countryId) {
+            var id = HttpContext.Session.GetInt32("id");
+            HttpContext.Session.SetInt32("countryId", countryId);
+
+            var itravelPlannerDBContext = _context.Trips.Where(t => t.UserId == id)
+               .Include(a => a.Country).Where(c => c.CountryId == countryId)
+               .Include(c => c.Country)
+               .ThenInclude(s => s.Locations)
+               .ThenInclude(m => m.Activities)
+               .ThenInclude(a => a.ActivityType);
+
+
+            return View(await itravelPlannerDBContext.ToListAsync());
+        }
+
+        public IActionResult AddActivity(string locationName, int locationId)
         {
+            HttpContext.Session.SetString("locationName", locationName);
+            HttpContext.Session.SetInt32("locationId", locationId);
             return RedirectToAction("Index", "Activities");
         }
 
@@ -59,7 +80,7 @@ namespace TripEventPlanner.Controllers
         public IActionResult Create()
         {
             ViewData["CountryId"] = new SelectList(_context.Countries, "CountryId", "Name");
-            ViewData["UserId"] = new SelectList(_context.Users, "UserId", "Email");
+            ViewData["UserId"] = new SelectList(_context.Users, "UserId" , "Email");
             return View();
         }
 
@@ -70,11 +91,13 @@ namespace TripEventPlanner.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("TripId,Name,StartDate,EndDate,CountryId,UserId")] Trip trip)
         {
+            var id = HttpContext.Session.GetInt32("id");
+            trip.UserId = Convert.ToInt16(id);
             if (ModelState.IsValid)
             {
                 _context.Add(trip);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return Redirect("~/Trips/index/" + id);
             }
             ViewData["CountryId"] = new SelectList(_context.Countries, "CountryId", "Name", trip.CountryId);
             ViewData["UserId"] = new SelectList(_context.Users, "UserId", "Email", trip.UserId);

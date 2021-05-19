@@ -29,6 +29,7 @@ namespace TripEventPlanner
             //services.AddDbContext<ItravelPlannerDBContext>(options => options.UseSqlServer("Server=tripeventplanner.database.windows.net;Database=ItravelPlannerDB;User Id=g5tp;Password=Group5tripplanner;"));
             services.AddDbContext<ItravelPlannerDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ItravelPlannerDBContext")));
 
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,6 +48,7 @@ namespace TripEventPlanner
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
+            app.UseSession();
             app.UseRouting();
 
             app.UseAuthorization();

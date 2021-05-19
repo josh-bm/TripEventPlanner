@@ -13,3 +13,18 @@ type.forEach(button => {
     })
 
 })
+
+if (activity[0] != null) {
+
+    switch (activity[0].value) {
+        case "Attraction":
+            document.querySelector(".activity__button--Attraction").setAttribute("style", "text-decoration: underline")
+            break;
+        case "Event":
+            document.querySelector(".activity__button--Event").setAttribute("style", "text-decoration: underline")
+            break;
+        case "Restaurant":
+            document.querySelector(".activity__button--Restaurant").setAttribute("style", "text-decoration: underline")
+            break;
+    }
+}
