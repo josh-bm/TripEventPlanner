@@ -4,30 +4,30 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create Trip</h1>
+<h1>Create Your Trip</h1>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
+                <label asp-for="Name" class="control-label">Trip Name</label>
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="StartDate" class="control-label"></label>
+                <label asp-for="StartDate" class="control-label">Start Date</label>
                 <input asp-for="StartDate" class="form-control" />
                 <span asp-validation-for="StartDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="EndDate" class="control-label"></label>
+                <label asp-for="EndDate" class="control-label">End Date</label>
                 <input asp-for="EndDate" class="form-control" />
                 <span asp-validation-for="EndDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CountryId" class="control-label"></label>
-                <select asp-for="CountryId" class ="form-control" asp-items="ViewBag.CountryId"></select>
+                <label asp-for="CountryId" class="control-label">Country</label>
+                <select asp-for="CountryId" class="form-control" asp-items="ViewBag.CountryId"></select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
@@ -36,9 +36,9 @@
     </div>
 </div>
 
-<div>
-    <a asp-action="Index" asp-route-id="6">Back to List</a>
-</div>
+@*<div>
+        <a asp-action="Index" asp-route-id="6">Back to List</a>
+    </div>*@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

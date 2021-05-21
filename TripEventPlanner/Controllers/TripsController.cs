@@ -13,9 +13,9 @@ namespace TripEventPlanner.Controllers
 {
     public class TripsController : Controller
     {
-        private readonly ItravelPlannerDBContext _context;
+        private readonly itripeventplannerDBContext _context;
 
-        public TripsController(ItravelPlannerDBContext context)
+        public TripsController(itripeventplannerDBContext context)
         {
             _context = context;
         }
@@ -25,7 +25,7 @@ namespace TripEventPlanner.Controllers
         {
             HttpContext.Session.SetInt32("id", id);
 
-            var itravelPlannerDBContext = _context.Trips.Where(t => t.UserId == id)
+            var itravelPlannerDBContext = _context.Trips.Where(t => t.UserId == 1) //id instead of 1 for dynamic change
                .Include(a => a.Country)
                .ThenInclude(c => c.Locations)
                .ThenInclude(m => m.Activities)
@@ -34,7 +34,8 @@ namespace TripEventPlanner.Controllers
             return View(await itravelPlannerDBContext.ToListAsync());
         }
 
-        public async Task<IActionResult> SelectedTrip(int countryId) {
+        public async Task<IActionResult> SelectedTrip(int countryId)
+        {
             var id = HttpContext.Session.GetInt32("id");
             HttpContext.Session.SetInt32("countryId", countryId);
 
@@ -44,7 +45,6 @@ namespace TripEventPlanner.Controllers
                .ThenInclude(s => s.Locations)
                .ThenInclude(m => m.Activities)
                .ThenInclude(a => a.ActivityType);
-
 
             return View(await itravelPlannerDBContext.ToListAsync());
         }
@@ -80,7 +80,7 @@ namespace TripEventPlanner.Controllers
         public IActionResult Create()
         {
             ViewData["CountryId"] = new SelectList(_context.Countries, "CountryId", "Name");
-            ViewData["UserId"] = new SelectList(_context.Users, "UserId" , "Email");
+            ViewData["UserId"] = new SelectList(_context.Users, "UserId", "Email");
             return View();
         }
 

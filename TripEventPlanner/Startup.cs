@@ -27,7 +27,7 @@ namespace TripEventPlanner
         {
             services.AddControllersWithViews();
             //services.AddDbContext<ItravelPlannerDBContext>(options => options.UseSqlServer("Server=tripeventplanner.database.windows.net;Database=ItravelPlannerDB;User Id=g5tp;Password=Group5tripplanner;"));
-            services.AddDbContext<ItravelPlannerDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ItravelPlannerDBContext")));
+            services.AddDbContext<itripeventplannerDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ItravelPlannerDBContext")));
 
             services.AddSession();
         }

@@ -46,15 +46,15 @@
                 </select>
             </article>
         </div>
-        <select class="form__activity" name="activityType" value="@ViewData["activityType"]">
-            @if (ViewData["activityType"] != null)
+        <select class="form__activity" name="ActivityType" value="@ViewData["ActivityType"]">
+            @if (ViewData["ActivityType"] != null)
             {
-                <option> @ViewData["activityType"] </option>
+                <option> @ViewData["ActivityType"] </option>
             }
             <option>All</option>
-            @foreach (var type in (IEnumerable<ActivityType>)ViewData["activityTypeFilter"])
+            @foreach (var type in (IEnumerable<ActivityType>)ViewData["ActivityTypeFilter"])
             {
-                @if (type.Name != Convert.ToString(ViewData["activityType"]))
+                @if (type.Name != Convert.ToString(ViewData["ActivityType"]))
                 {
                     <option>@type.Name</option>
 
@@ -65,7 +65,7 @@
                 <input type="submit" value="Search" class="btn btn-default" /> |
                 <a asp-action="Index">Rest</a>
             </div>*@
-        @foreach (var type in (IEnumerable<ActivityType>)ViewData["activityTypeFilter"])
+        @foreach (var type in (IEnumerable<ActivityType>)ViewData["ActivityTypeFilter"])
         {
             <button type="submit" class="activity__button activity__button--@type.Name btn btn-default">@type.Name</button>
         }

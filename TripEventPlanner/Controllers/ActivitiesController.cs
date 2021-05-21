@@ -13,28 +13,28 @@ namespace TripEventPlanner.Controllers
 {
     public class ActivitiesController : Controller
     {
-        private readonly ItravelPlannerDBContext _context;
+        private readonly itripeventplannerDBContext _context;
 
-        public ActivitiesController(ItravelPlannerDBContext context)
+        public ActivitiesController(itripeventplannerDBContext context)
         {
             _context = context;
         }
 
-        public async Task<IActionResult> Index(string searchString, string activityType, string location)
+        public async Task<IActionResult> Index(string searchString, string ActivityType, string location)
         {
             if (location == null)
             {
                 location = "All";
             }
-            if (activityType == null)
+            if (ActivityType == null)
             {
-                activityType = "All";
+                ActivityType = "All";
             }
             ViewData["CurrentFilter"] = searchString;
 
-            var activityTypeData = _context.ActivityTypes;
-            ViewData["activityTypeFilter"] = activityTypeData;
-            ViewData["activityType"] = activityType;
+            var ActivityTypeData = _context.ActivityTypes;
+            ViewData["ActivityTypeFilter"] = ActivityTypeData;
+            ViewData["ActivityType"] = ActivityType;
 
             var locationData = _context.Locations;
             ViewData["locationFilter"] = locationData;
@@ -43,7 +43,7 @@ namespace TripEventPlanner.Controllers
             var stringEmty = !String.IsNullOrEmpty(searchString);
 
             var queryType = _context.Activities
-                   .Include(a => a.ActivityType).Where(s => activityType == s.ActivityType.Name)
+                   .Include(a => a.ActivityType).Where(s => ActivityType == s.ActivityType.Name)
                    .Include(a => a.Location)
                    .Include(s => s.ActivityType);
             var queryLocation = _context.Activities
@@ -51,7 +51,7 @@ namespace TripEventPlanner.Controllers
                    .Include(a => a.Location).Where(s => location == s.Location.Name)
                    .Include(s => s.ActivityType);
             var queryAll = _context.Activities
-                    .Include(a => a.ActivityType).Where(s => activityType == s.ActivityType.Name)
+                    .Include(a => a.ActivityType).Where(s => ActivityType == s.ActivityType.Name)
                    .Include(a => a.Location).Where(s => location == s.Location.Name)
                    .Include(s => s.ActivityType);
             var activity = _context.Activities
@@ -59,19 +59,19 @@ namespace TripEventPlanner.Controllers
                 .Include(a => a.Location)
                 .Include(s => s.ActivityType);
 
-            if (String.IsNullOrEmpty(searchString) & activityType != "All" & location != "All")
+            if (String.IsNullOrEmpty(searchString) & ActivityType != "All" & location != "All")
             {
                 activity = queryAll;
             }
-            if (String.IsNullOrEmpty(searchString) & activityType == "All" & location != "All")
+            if (String.IsNullOrEmpty(searchString) & ActivityType == "All" & location != "All")
             {
                 activity = queryLocation;
             }
-            if (String.IsNullOrEmpty(searchString) & activityType != "All" & location == "All")
+            if (String.IsNullOrEmpty(searchString) & ActivityType != "All" & location == "All")
             {
                 activity = queryType;
             }
-            if (activityType == "All" & location == "All" & stringEmty)
+            if (ActivityType == "All" & location == "All" & stringEmty)
             {
                 activity = _context.Activities
                     .Where(s => s.Name.Contains(searchString))
@@ -79,21 +79,21 @@ namespace TripEventPlanner.Controllers
                     .Include(s => s.ActivityType);
             }
 
-            if (activityType != "All" & location != "All" & stringEmty)
+            if (ActivityType != "All" & location != "All" & stringEmty)
             {
                 activity = _context.Activities
-                    .Where(s => s.Name.Contains(searchString) && s.ActivityType.Name.Contains(activityType))
+                    .Where(s => s.Name.Contains(searchString) && s.ActivityType.Name.Contains(ActivityType))
                     .Include(a => a.Location).Where(s => location == s.Location.Name)
                     .Include(s => s.ActivityType);
             }
-            if (activityType != "All" & location == "All" & stringEmty)
+            if (ActivityType != "All" & location == "All" & stringEmty)
             {
                 activity = _context.Activities
-                    .Where(s => s.Name.Contains(searchString) && s.ActivityType.Name.Contains(activityType))
+                    .Where(s => s.Name.Contains(searchString) && s.ActivityType.Name.Contains(ActivityType))
                     .Include(a => a.Location)
                     .Include(s => s.ActivityType);
             }
-            if (activityType == "All" & location != "All" & stringEmty)
+            if (ActivityType == "All" & location != "All" & stringEmty)
             {
                 activity = _context.Activities
                     .Where(s => s.Name.Contains(searchString) && s.Location.Name.Contains(location))

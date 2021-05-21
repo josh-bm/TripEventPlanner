@@ -10,9 +10,9 @@ namespace TripEventPlanner.Controllers
 {
     public class SearchController : Controller
     {
-        private readonly ItravelPlannerDBContext _context;
+        private readonly itripeventplannerDBContext _context;
 
-        public SearchController(ItravelPlannerDBContext context)
+        public SearchController(itripeventplannerDBContext context)
         {
             _context = context;
         }

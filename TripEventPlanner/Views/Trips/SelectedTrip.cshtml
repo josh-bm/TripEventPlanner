@@ -15,7 +15,6 @@
             <a asp-action="Create">Create Trip</a>
         </p>*@
 
-
     <section class="my-trip">
 
         <section class="trip-location">
@@ -49,7 +48,7 @@
                 </section>
                 <section class="trip-activity-info">
                     <span class="info-span"><strong> Country: </strong>@item.Country.Name</span>
-                    <span class="info-span"><strong> Activitytype: </strong>@Html.DisplayFor(modelItem => locationItem.ActivityType.Name)</span>
+                    <span class="info-span"><strong> ActivityType: </strong>@Html.DisplayFor(modelItem => locationItem.ActivityType.Name)</span>
                     <span class="info-span"><strong> Activity Name: </strong>@locationItem.Name</span>
                     <span class="info-span"><strong> Description: </strong>@locationItem.Description</span>
                     <span class="info-span"><strong> Adress: </strong>@locationItem.Address</span>
@@ -61,5 +60,3 @@
 
     }
 }
-
-

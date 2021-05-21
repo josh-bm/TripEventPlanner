@@ -12,9 +12,9 @@ namespace TripEventPlanner.Controllers
 {
     public class UsersController : Controller
     {
-        private readonly ItravelPlannerDBContext _context;
+        private readonly itripeventplannerDBContext _context;
 
-        public UsersController(ItravelPlannerDBContext context)
+        public UsersController(itripeventplannerDBContext context)
         {
             _context = context;
         }

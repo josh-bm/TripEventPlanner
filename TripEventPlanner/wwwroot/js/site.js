@@ -7,15 +7,12 @@ const type = document.querySelectorAll(".activity__button");
 const activity = document.querySelectorAll(".form__activity");
 
 type.forEach(button => {
-
     button.addEventListener("click", e => {
         activity[0].value = button.textContent;
     })
-
 })
 
 if (activity[0] != null) {
-
     switch (activity[0].value) {
         case "Attraction":
             document.querySelector(".activity__button--Attraction").setAttribute("style", "text-decoration: underline")

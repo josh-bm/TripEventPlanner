@@ -14,7 +14,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">TripEventPlanner</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">TripPlanner</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -34,7 +34,7 @@
                         <li class="nav-item d-flex">
                             @*<a class="nav-link text-dark" asp-area="" asp-controller="Trips" asp-action="Index">My Trip</a>*@
                             <i class="far fa-map"></i>
-                            <a class="nav-link text-dark" href="trips/index/6">My Trips</a>
+                            <a class="nav-link text-dark" asp-controller="Trips" asp-action="Index">My Trips</a>
                         </li>
 
                         <li class="nav-item d-flex">
